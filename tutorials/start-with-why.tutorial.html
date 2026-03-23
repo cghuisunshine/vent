@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Start With Why — Practical Tutorial & Workshop</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f8fafc;
+        --panel: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --border: rgba(15, 23, 42, 0.14);
+        --shadow: 0 10px 24px rgba(2, 6, 23, 0.08);
+        --link: #2563eb;
+        --link-visited: #6d28d9;
+        --radius: 14px;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #05070c;
+          --panel: rgba(2, 6, 23, 0.82);
+          --text: #e5e7eb;
+          --muted: #94a3b8;
+          --border: rgba(148, 163, 184, 0.22);
+          --shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+          --link: #60a5fa;
+          --link-visited: #a78bfa;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.6;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 28px 16px 44px;
+      }
+
+      header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      header a {
+        color: var(--link);
+        text-decoration: none;
+      }
+
+      header a:visited {
+        color: var(--link-visited);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.7rem;
+        letter-spacing: 0.01em;
+      }
+
+      .subtitle {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      section {
+        margin: 16px 0;
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      h2 {
+        margin: 0 0 10px;
+        font-size: 1.2rem;
+      }
+
+      h3 {
+        margin: 14px 0 8px;
+        font-size: 1rem;
+        color: var(--muted);
+        font-weight: 650;
+      }
+
+      p {
+        margin: 8px 0;
+      }
+
+      ul,
+      ol {
+        margin: 8px 0 8px 20px;
+        padding: 0;
+      }
+
+      li {
+        margin: 6px 0;
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 0.95em;
+        padding: 0.12em 0.38em;
+        border-radius: 8px;
+        background: rgba(148, 163, 184, 0.22);
+      }
+
+      .toc {
+        columns: 2;
+        column-gap: 28px;
+      }
+
+      @media (max-width: 720px) {
+        .toc {
+          columns: 1;
+        }
+      }
+
+      @media print {
+        body {
+          background: #fff;
+          color: #000;
+        }
+        section {
+          box-shadow: none;
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <h1>Start With Why — Practical Tutorial &amp; Workshop</h1>
+          <p class="subtitle">Original tutorial inspired by Simon Sinek’s <em>Start With Why</em> (no copied text).</p>
+        </div>
+        <div><a href="./README.md">Tutorial index</a></div>
+      </header>
+
+      <section aria-label="Table of contents">
+        <h2>Contents</h2>
+        <ul class="toc">
+          <li><a href="#learning-goals">Learning goals</a></li>
+          <li><a href="#golden-circle">The Golden Circle</a></li>
+          <li><a href="#communication">Why-first communication</a></li>
+          <li><a href="#ladder">From Why to action</a></li>
+          <li><a href="#workshop">90-minute workshop</a></li>
+          <li><a href="#pitfalls">Pitfalls &amp; fixes</a></li>
+          <li><a href="#decisions">Decision rubric</a></li>
+          <li><a href="#exercises">Exercises</a></li>
+          <li><a href="#quiz">Quiz</a></li>
+          <li><a href="#templates">One-page templates</a></li>
+        </ul>
+      </section>
+
+      <section id="learning-goals">
+        <h2>Learning goals</h2>
+        <p>By the end, you can:</p>
+        <ul>
+          <li>Explain the Golden Circle model (<strong>Why → How → What</strong>) in plain language.</li>
+          <li>Draft a clear, testable <strong>Why statement</strong> (purpose/cause/belief).</li>
+          <li>Translate the Why into <strong>How principles</strong> (behaviors) and <strong>What proof</strong> (evidence).</li>
+          <li>Build a message that attracts the right people without overselling.</li>
+        </ul>
+      </section>
+
+      <section id="golden-circle">
+        <h2>The Golden Circle (core model)</h2>
+        <h3>Definitions</h3>
+        <ul>
+          <li><strong>Why</strong>: the cause/purpose/belief that explains why you exist beyond making money.</li>
+          <li><strong>How</strong>: the principles (rules of behavior) that bring the Why to life.</li>
+          <li><strong>What</strong>: the products/services/outputs people can buy or observe.</li>
+        </ul>
+        <h3>Quick checks</h3>
+        <ul>
+          <li>If your “Why” can be copied by any competitor verbatim, it’s probably a What or a generic slogan.</li>
+          <li>If your “Why” is just “to be the best” or “to grow,” it’s a goal, not a purpose.</li>
+        </ul>
+        <h3>What changes when you start with Why</h3>
+        <ul>
+          <li>Lead with meaning, then back it up with credible proof.</li>
+          <li>Use Why as a clarity tool; if the Why is unclear, the message turns into hype.</li>
+        </ul>
+      </section>
+
+      <section id="communication">
+        <h2>Why-first communication (without manipulation)</h2>
+        <h3>The ethical line</h3>
+        <ul>
+          <li><strong>Alignment</strong>: “Here is what we believe; if you share it, you’ll likely value what we do.”</li>
+          <li><strong>Manipulation</strong>: “Here are tactics to trigger purchase regardless of fit.”</li>
+        </ul>
+        <h3>Practical guidance</h3>
+        <ul>
+          <li>State the Why as a belief, not a brag.</li>
+          <li>Show the How as observable behaviors, not adjectives.</li>
+          <li>Demonstrate the What with evidence (results, demos, testimonials, transparency).</li>
+        </ul>
+      </section>
+
+      <section id="ladder">
+        <h2>From Why to action: a usable ladder</h2>
+        <h3>Step 1 — Write the Why</h3>
+        <p>Use this structure:</p>
+        <ul>
+          <li>“We exist to <strong>[contribution]</strong> so that <strong>[impact]</strong> for <strong>[people]</strong>.”</li>
+        </ul>
+        <p>Examples (original, generic):</p>
+        <ul>
+          <li>“We exist to help first-time managers lead with confidence so teams can do their best work.”</li>
+          <li>“We exist to make personal finance less intimidating so people can build real freedom.”</li>
+        </ul>
+
+        <h3>Step 2 — Define How principles (3–7)</h3>
+        <p>Good principles are actionable, tradeoff-based, and auditable:</p>
+        <ul>
+          <li><strong>Actionable</strong>: you can do/not do them today.</li>
+          <li><strong>Tradeoff-based</strong>: they imply what you refuse to do.</li>
+          <li><strong>Auditable</strong>: others can observe them.</li>
+        </ul>
+        <p>Examples:</p>
+        <ul>
+          <li>“Teach before we sell.”</li>
+          <li>“Default to small experiments over big launches.”</li>
+          <li>“Be clear even when it costs us a deal.”</li>
+        </ul>
+
+        <h3>Step 3 — Choose What proof points</h3>
+        <ul>
+          <li>What: product/service/output.</li>
+          <li>Proof: measurable outcome, demo, story, or transparent artifact.</li>
+          <li>Link: which part of the Why the proof supports.</li>
+        </ul>
+      </section>
+
+      <section id="workshop">
+        <h2>Workshop agenda (90 minutes)</h2>
+        <h3>0–10 min — Setup</h3>
+        <ul>
+          <li>Pick a subject: you, a team, a product, a club, or a class project.</li>
+          <li>Pick a target audience: who you want to attract (and who you’re not for).</li>
+        </ul>
+
+        <h3>10–30 min — Why discovery prompts</h3>
+        <ul>
+          <li>What problem are you consistently drawn to solve?</li>
+          <li>What “unfair advantage” do you have (experience, proximity, worldview)?</li>
+          <li>What do you believe is broken about the status quo?</li>
+          <li>What future would you be proud to contribute to?</li>
+        </ul>
+
+        <h3>30–55 min — Draft and sharpen the Why</h3>
+        <ul>
+          <li>Draft 3 versions; pick the one that feels most specific and true.</li>
+          <li>Replace vague words (“empower,” “innovate”) with concrete outcomes.</li>
+          <li>Run the copy test and the goal vs purpose test.</li>
+        </ul>
+
+        <h3>55–75 min — Build the ladder (How + What proof)</h3>
+        <ul>
+          <li>Write 5 How principles as “We will…” / “We won’t…”.</li>
+          <li>List 3 proof points you can show within 2 weeks.</li>
+        </ul>
+
+        <h3>75–90 min — Message rehearsal</h3>
+        <p>Deliver a 45–60s message:</p>
+        <ul>
+          <li>Why (belief)</li>
+          <li>How (principles)</li>
+          <li>What (proof)</li>
+          <li>Ask (what you want the audience to do next)</li>
+        </ul>
+      </section>
+
+      <section id="pitfalls">
+        <h2>Common pitfalls (and fixes)</h2>
+        <h3>Pitfall: values that aren’t behaviors</h3>
+        <ul>
+          <li>Fix: rewrite values as actions (“We are transparent” → “We publish decisions and tradeoffs weekly”).</li>
+        </ul>
+        <h3>Pitfall: a Why that’s too broad</h3>
+        <ul>
+          <li>Fix: narrow the audience or impact until it becomes distinctive.</li>
+        </ul>
+        <h3>Pitfall: Why as a slogan only</h3>
+        <ul>
+          <li>Fix: attach a decision rule (what you’ll stop doing if it conflicts).</li>
+        </ul>
+        <h3>Pitfall: over-claiming</h3>
+        <ul>
+          <li>Fix: keep Why aspirational but grounded; add proof commitments (e.g., publish progress monthly).</li>
+        </ul>
+      </section>
+
+      <section id="decisions">
+        <h2>Decision-making rubric</h2>
+        <p>Score 0–2 on each:</p>
+        <ul>
+          <li><strong>Why-fit</strong>: does it serve the belief/purpose?</li>
+          <li><strong>How-fit</strong>: can we do it without breaking principles?</li>
+          <li><strong>Proof</strong>: can we show credible evidence soon?</li>
+          <li><strong>Tradeoffs</strong>: what do we stop doing to make it real?</li>
+        </ul>
+        <p>Total (0–8):</p>
+        <ul>
+          <li>0–3: likely distraction</li>
+          <li>4–6: consider as experiment</li>
+          <li>7–8: prioritize</li>
+        </ul>
+      </section>
+
+      <section id="exercises">
+        <h2>Exercises</h2>
+        <h3>Exercise 1 — “Five whys” of motivation (personal)</h3>
+        <ul>
+          <li>Why does this work matter to you?</li>
+          <li>Why does that matter?</li>
+          <li>Repeat 5 times; summarize the pattern as one belief statement.</li>
+        </ul>
+
+        <h3>Exercise 2 — Audience alignment</h3>
+        <ul>
+          <li>Write 3 sentences that politely repel the wrong audience.</li>
+          <li>Write 3 sentences that clearly attract the right audience.</li>
+        </ul>
+
+        <h3>Exercise 3 — Proof plan</h3>
+        <ul>
+          <li>Pick one proof point you can produce in 7 days.</li>
+          <li>Define: artifact, owner, deadline, and credibility measure.</li>
+        </ul>
+      </section>
+
+      <section id="quiz">
+        <h2>Quiz (self-check)</h2>
+        <ol>
+          <li>What is the difference between a Why and a goal?</li>
+          <li>Give one example of a How principle that implies a tradeoff.</li>
+          <li>Why should proof points be fast to produce early on?</li>
+          <li>What happens when the What is strong but the Why is unclear?</li>
+          <li>Write a one-sentence Why using the provided template.</li>
+        </ol>
+        <h3>Answer key (short)</h3>
+        <ol>
+          <li>A Why is purpose/belief; a goal is a desired outcome.</li>
+          <li>Example: “We won’t ship features without customer validation.”</li>
+          <li>Early proof reduces hype and increases trust.</li>
+          <li>The message becomes feature-pushing and competes on noise/price.</li>
+          <li>Any clear, specific statement with contribution, impact, and audience.</li>
+        </ol>
+      </section>
+
+      <section id="templates">
+        <h2>One-page templates</h2>
+
+        <h3>Why statement</h3>
+        <ul>
+          <li>We exist to:</li>
+          <li>So that:</li>
+          <li>For:</li>
+          <li>We will know it’s working when:</li>
+        </ul>
+
+        <h3>How principles</h3>
+        <ul>
+          <li>We will:</li>
+          <li>We won’t:</li>
+          <li>When pressured, we still:</li>
+        </ul>
+
+        <h3>What proof</h3>
+        <ul>
+          <li>What:</li>
+          <li>Proof:</li>
+          <li>Timebox:</li>
+          <li>Link to Why:</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

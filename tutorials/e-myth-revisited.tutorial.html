@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The E-Myth Revisited — Systems Tutorial & Implementation Guide</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f8fafc;
+        --panel: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --border: rgba(15, 23, 42, 0.14);
+        --shadow: 0 10px 24px rgba(2, 6, 23, 0.08);
+        --link: #2563eb;
+        --link-visited: #6d28d9;
+        --radius: 14px;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #05070c;
+          --panel: rgba(2, 6, 23, 0.82);
+          --text: #e5e7eb;
+          --muted: #94a3b8;
+          --border: rgba(148, 163, 184, 0.22);
+          --shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+          --link: #60a5fa;
+          --link-visited: #a78bfa;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.6;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 28px 16px 44px;
+      }
+
+      header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      header a {
+        color: var(--link);
+        text-decoration: none;
+      }
+
+      header a:visited {
+        color: var(--link-visited);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.7rem;
+        letter-spacing: 0.01em;
+      }
+
+      .subtitle {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      section {
+        margin: 16px 0;
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      h2 {
+        margin: 0 0 10px;
+        font-size: 1.2rem;
+      }
+
+      h3 {
+        margin: 14px 0 8px;
+        font-size: 1rem;
+        color: var(--muted);
+        font-weight: 650;
+      }
+
+      p {
+        margin: 8px 0;
+      }
+
+      ul,
+      ol {
+        margin: 8px 0 8px 20px;
+        padding: 0;
+      }
+
+      li {
+        margin: 6px 0;
+      }
+
+      .toc {
+        columns: 2;
+        column-gap: 28px;
+      }
+
+      @media (max-width: 720px) {
+        .toc {
+          columns: 1;
+        }
+      }
+
+      @media print {
+        body {
+          background: #fff;
+          color: #000;
+        }
+        section {
+          box-shadow: none;
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <h1>The E-Myth Revisited — Systems Tutorial &amp; Implementation Guide</h1>
+          <p class="subtitle">Original tutorial inspired by Michael E. Gerber’s <em>The E-Myth Revisited</em> (no copied text).</p>
+        </div>
+        <div><a href="./README.md">Tutorial index</a></div>
+      </header>
+
+      <section aria-label="Table of contents">
+        <h2>Contents</h2>
+        <ul class="toc">
+          <li><a href="#learning-goals">Learning goals</a></li>
+          <li><a href="#core-problem">Core problem</a></li>
+          <li><a href="#three-roles">Three roles</a></li>
+          <li><a href="#franchise-prototype">Franchise prototype</a></li>
+          <li><a href="#bdp">Business Development Process</a></li>
+          <li><a href="#systems">What to document</a></li>
+          <li><a href="#metrics">Minimum dashboard</a></li>
+          <li><a href="#plan">4-week plan</a></li>
+          <li><a href="#worksheets">Worksheets</a></li>
+          <li><a href="#quiz">Quiz</a></li>
+        </ul>
+      </section>
+
+      <section id="learning-goals">
+        <h2>Learning goals</h2>
+        <p>By the end, you can:</p>
+        <ul>
+          <li>Explain the “entrepreneurial myth” in practical terms.</li>
+          <li>Identify the three internal roles: Entrepreneur, Manager, Technician.</li>
+          <li>Draft a simple franchise prototype: a business that works predictably without heroics.</li>
+          <li>Create a starter operating system (SOPs, checklists, metrics, training plan).</li>
+        </ul>
+      </section>
+
+      <section id="core-problem">
+        <h2>The core problem: confusing doing with building</h2>
+        <h3>The pattern</h3>
+        <ul>
+          <li>You’re great at the craft (the work itself).</li>
+          <li>The business grows, and you become the bottleneck.</li>
+          <li>Stress rises, quality becomes inconsistent, and “everything depends on me.”</li>
+        </ul>
+        <h3>The reframe</h3>
+        <ul>
+          <li>Your job becomes: <strong>build a machine that produces results</strong>, not personally produce every result.</li>
+        </ul>
+      </section>
+
+      <section id="three-roles">
+        <h2>The three roles inside every operator</h2>
+        <h3>Technician</h3>
+        <ul>
+          <li>Loves doing the work.</li>
+          <li>Optimizes for speed and immediate output.</li>
+          <li>Risk: builds a job, not a business.</li>
+        </ul>
+        <h3>Manager</h3>
+        <ul>
+          <li>Loves order, plans, and predictability.</li>
+          <li>Turns chaos into schedules, staffing, and checklists.</li>
+          <li>Risk: becomes the “cop” without clear systems.</li>
+        </ul>
+        <h3>Entrepreneur</h3>
+        <ul>
+          <li>Loves vision, change, possibility.</li>
+          <li>Designs the future: positioning, product mix, growth path.</li>
+          <li>Risk: constant reinvention without execution.</li>
+        </ul>
+        <h3>Practical takeaway</h3>
+        <ul>
+          <li>Schedule time for all three roles.</li>
+          <li>If one role dominates, you get predictable failure modes (burnout, stagnation, or chaos).</li>
+        </ul>
+      </section>
+
+      <section id="franchise-prototype">
+        <h2>The franchise prototype (repeatability as a feature)</h2>
+        <h3>What “franchise-like” means here</h3>
+        <ul>
+          <li>Not “open a franchise,” but “make your operation teachable and repeatable.”</li>
+          <li>A new hire can deliver acceptable quality with minimal tribal knowledge.</li>
+        </ul>
+        <h3>Why it matters</h3>
+        <ul>
+          <li>Repeatability increases quality, profitability, and your ability to step away without collapse.</li>
+        </ul>
+      </section>
+
+      <section id="bdp">
+        <h2>The Business Development Process (a usable sequence)</h2>
+        <h3>Step 1 — Primary Aim (your life, not your business)</h3>
+        <ul>
+          <li>What kind of life do you want (time, stress, money, meaning)?</li>
+          <li>What does “success” look like in a normal week?</li>
+        </ul>
+
+        <h3>Step 2 — Strategic Objective (target state)</h3>
+        <ul>
+          <li>Target customer</li>
+          <li>Offering (what you sell)</li>
+          <li>Differentiator (why you)</li>
+          <li>Revenue/profit targets</li>
+          <li>Owner-independence target (how much runs without you)</li>
+        </ul>
+
+        <h3>Step 3 — Organizational Strategy (roles before people)</h3>
+        <p>Create an <strong>org chart with seats</strong> (one person can hold multiple seats today):</p>
+        <ul>
+          <li>Owner/CEO</li>
+          <li>Operations</li>
+          <li>Sales/Marketing</li>
+          <li>Finance/Admin</li>
+          <li>Delivery/Service</li>
+        </ul>
+        <p>Rule: design the organization you need, then decide who fills seats.</p>
+
+        <h3>Step 4 — Management Strategy (cadence + accountability)</h3>
+        <ul>
+          <li>Weekly planning + review meeting</li>
+          <li>Daily/shift check-ins if needed</li>
+          <li>Clear owners for each metric and process</li>
+        </ul>
+
+        <h3>Step 5 — People Strategy (hiring + training)</h3>
+        <ul>
+          <li>Role scorecards (outcomes, behaviors, skills)</li>
+          <li>Training path (week 1, week 2, 30 days)</li>
+          <li>Feedback rhythm (weekly early, then monthly)</li>
+        </ul>
+
+        <h3>Step 6 — Marketing Strategy (repeatable pipeline)</h3>
+        <ul>
+          <li>Target segment and promise</li>
+          <li>Lead sources (2–4 you’ll commit to)</li>
+          <li>Conversion steps (scripts, offers, follow-up)</li>
+          <li>Retention/referrals plan</li>
+        </ul>
+
+        <h3>Step 7 — Systems Strategy (the operating manual)</h3>
+        <p>Build systems that make results predictable.</p>
+      </section>
+
+      <section id="systems">
+        <h2>Systems: what to document first</h2>
+        <h3>Start with high-frequency, high-risk processes</h3>
+        <p>Pick 5–10 processes that most affect customer experience and cash flow:</p>
+        <ul>
+          <li>Opening/closing routine</li>
+          <li>Handling inquiries/leads</li>
+          <li>Delivering the core service</li>
+          <li>Quality checks and rework handling</li>
+          <li>Billing, refunds, complaints</li>
+          <li>Inventory/order management (if relevant)</li>
+        </ul>
+        <h3>SOP format (keep it teachable)</h3>
+        <ul>
+          <li>Purpose</li>
+          <li>Trigger</li>
+          <li>Inputs</li>
+          <li>Steps (numbered, observable)</li>
+          <li>Quality standard (“done means…”)</li>
+          <li>Time expectation</li>
+          <li>Exceptions</li>
+        </ul>
+      </section>
+
+      <section id="metrics">
+        <h2>Metrics: the minimum dashboard</h2>
+        <p>Choose a few leading and lagging indicators:</p>
+        <ul>
+          <li>Leads/week (leading)</li>
+          <li>Conversion rate (leading)</li>
+          <li>On-time delivery rate (leading)</li>
+          <li>Rework/defect rate (leading)</li>
+          <li>Revenue and gross margin (lagging)</li>
+          <li>Cash on hand (lagging)</li>
+        </ul>
+        <p>Rule: if you can’t explain how a metric changes behavior, don’t track it yet.</p>
+      </section>
+
+      <section id="plan">
+        <h2>A 4-week implementation plan (starter system)</h2>
+        <h3>Week 1 — Clarify roles and cadence</h3>
+        <ul>
+          <li>Draft the org chart (seats, not names).</li>
+          <li>Schedule a weekly review: metrics + priorities + blockers.</li>
+          <li>Write the Primary Aim and Strategic Objective (1 page each).</li>
+        </ul>
+        <h3>Week 2 — Document the first 3 SOPs</h3>
+        <ul>
+          <li>Choose the three most repeated processes.</li>
+          <li>Create checklists a new hire could follow.</li>
+          <li>Add a “quality gate” to each (what must be true to call it done).</li>
+        </ul>
+        <h3>Week 3 — Train and test</h3>
+        <ul>
+          <li>Run SOPs as if you were new.</li>
+          <li>Note friction points and rewrite for clarity.</li>
+          <li>Start a simple dashboard (spreadsheet is fine).</li>
+        </ul>
+        <h3>Week 4 — Strengthen the pipeline</h3>
+        <ul>
+          <li>Document lead handling and follow-up steps.</li>
+          <li>Create a basic onboarding plan (first 5 shifts / first 2 weeks).</li>
+          <li>Identify one constraint and improve it.</li>
+        </ul>
+      </section>
+
+      <section id="worksheets">
+        <h2>Worksheets (copy/paste)</h2>
+        <h3>Primary Aim</h3>
+        <ul>
+          <li>Ideal work week description:</li>
+          <li>Non-negotiables (health/family/learning):</li>
+          <li>Stress limits and boundaries:</li>
+        </ul>
+        <h3>Strategic Objective</h3>
+        <ul>
+          <li>Customer:</li>
+          <li>Promise:</li>
+          <li>Differentiator:</li>
+          <li>12-month targets:</li>
+          <li>Owner independence target:</li>
+        </ul>
+        <h3>SOP</h3>
+        <ul>
+          <li>SOP name:</li>
+          <li>Trigger:</li>
+          <li>Steps:</li>
+          <li>Quality standard:</li>
+          <li>Metrics:</li>
+        </ul>
+      </section>
+
+      <section id="quiz">
+        <h2>Quiz (self-check)</h2>
+        <ol>
+          <li>Why does a great Technician often struggle as the business grows?</li>
+          <li>What does “org chart with seats” mean?</li>
+          <li>Name one leading metric and one lagging metric for your context.</li>
+          <li>What makes an SOP teachable?</li>
+          <li>What’s one risk of Entrepreneur-only behavior?</li>
+        </ol>
+        <h3>Answer key (short)</h3>
+        <ol>
+          <li>The business becomes dependent on personal output and decisions.</li>
+          <li>Roles are designed before choosing people; one person can hold multiple seats.</li>
+          <li>Example: leads/week (leading), revenue (lagging).</li>
+          <li>Clear triggers, observable steps, and defined quality standards.</li>
+          <li>Constant change without stable execution.</li>
+        </ol>
+      </section>
+    </main>
+  </body>
+</html>

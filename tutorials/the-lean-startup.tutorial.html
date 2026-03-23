@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Lean Startup — Experimentation Tutorial & Playbook</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f8fafc;
+        --panel: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --border: rgba(15, 23, 42, 0.14);
+        --shadow: 0 10px 24px rgba(2, 6, 23, 0.08);
+        --link: #2563eb;
+        --link-visited: #6d28d9;
+        --radius: 14px;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #05070c;
+          --panel: rgba(2, 6, 23, 0.82);
+          --text: #e5e7eb;
+          --muted: #94a3b8;
+          --border: rgba(148, 163, 184, 0.22);
+          --shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+          --link: #60a5fa;
+          --link-visited: #a78bfa;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.6;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 28px 16px 44px;
+      }
+
+      header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      header a {
+        color: var(--link);
+        text-decoration: none;
+      }
+
+      header a:visited {
+        color: var(--link-visited);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.7rem;
+        letter-spacing: 0.01em;
+      }
+
+      .subtitle {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      section {
+        margin: 16px 0;
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      h2 {
+        margin: 0 0 10px;
+        font-size: 1.2rem;
+      }
+
+      h3 {
+        margin: 14px 0 8px;
+        font-size: 1rem;
+        color: var(--muted);
+        font-weight: 650;
+      }
+
+      p {
+        margin: 8px 0;
+      }
+
+      ul,
+      ol {
+        margin: 8px 0 8px 20px;
+        padding: 0;
+      }
+
+      li {
+        margin: 6px 0;
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 0.95em;
+        padding: 0.12em 0.38em;
+        border-radius: 8px;
+        background: rgba(148, 163, 184, 0.22);
+      }
+
+      .toc {
+        columns: 2;
+        column-gap: 28px;
+      }
+
+      @media (max-width: 720px) {
+        .toc {
+          columns: 1;
+        }
+      }
+
+      @media print {
+        body {
+          background: #fff;
+          color: #000;
+        }
+        section {
+          box-shadow: none;
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <h1>The Lean Startup — Experimentation Tutorial &amp; Playbook</h1>
+          <p class="subtitle">Original tutorial inspired by Eric Ries’ <em>The Lean Startup</em> (no copied text).</p>
+        </div>
+        <div><a href="./README.md">Tutorial index</a></div>
+      </header>
+
+      <section aria-label="Table of contents">
+        <h2>Contents</h2>
+        <ul class="toc">
+          <li><a href="#learning-goals">Learning goals</a></li>
+          <li><a href="#bml">Build–Measure–Learn</a></li>
+          <li><a href="#hypotheses">Hypotheses</a></li>
+          <li><a href="#mvp">MVP patterns</a></li>
+          <li><a href="#metrics">Metrics</a></li>
+          <li><a href="#experiments">Experiment card</a></li>
+          <li><a href="#pivot">Pivot vs persevere</a></li>
+          <li><a href="#continuous">Five whys</a></li>
+          <li><a href="#plan">6-week lean cycle</a></li>
+          <li><a href="#exercises">Exercises</a></li>
+          <li><a href="#quiz">Quiz</a></li>
+        </ul>
+      </section>
+
+      <section id="learning-goals">
+        <h2>Learning goals</h2>
+        <p>By the end, you can:</p>
+        <ul>
+          <li>Explain <strong>Build–Measure–Learn</strong> and validated learning.</li>
+          <li>Design an MVP that tests one key hypothesis.</li>
+          <li>Choose metrics that are actionable (not vanity).</li>
+          <li>Decide when to pivot vs persevere using explicit criteria.</li>
+        </ul>
+      </section>
+
+      <section id="bml">
+        <h2>The core loop: Build–Measure–Learn</h2>
+        <h3>Build</h3>
+        <ul>
+          <li>Create the smallest thing that tests a hypothesis.</li>
+          <li>The goal is learning, not shipping for its own sake.</li>
+        </ul>
+        <h3>Measure</h3>
+        <ul>
+          <li>Collect data tied to the hypothesis.</li>
+          <li>Prefer cohort/behavioral metrics over totals.</li>
+        </ul>
+        <h3>Learn</h3>
+        <ul>
+          <li>Turn results into a decision: improve, change direction, or stop.</li>
+          <li>Write down what you learned so the team doesn’t “re-learn” later.</li>
+        </ul>
+      </section>
+
+      <section id="hypotheses">
+        <h2>Hypotheses (what to test)</h2>
+        <h3>Value hypothesis (do users get value?)</h3>
+        <ul>
+          <li>Example: “Users complete onboarding without help.”</li>
+          <li>Example: “Teams use feature X weekly because it saves time.”</li>
+        </ul>
+        <h3>Growth hypothesis (can it spread sustainably?)</h3>
+        <ul>
+          <li>Example: “Referral invites convert at ≥ 10%.”</li>
+          <li>Example: “Paid acquisition yields LTV:CAC ≥ 3:1.”</li>
+        </ul>
+        <h3>A good hypothesis is</h3>
+        <ul>
+          <li>Specific (who, what behavior, by when)</li>
+          <li>Measurable (metric + threshold)</li>
+          <li>Timeboxed (decision date)</li>
+        </ul>
+      </section>
+
+      <section id="mvp">
+        <h2>MVP patterns (choose one intentionally)</h2>
+        <h3>Concierge MVP</h3>
+        <ul>
+          <li>Do the work manually behind the scenes.</li>
+          <li>Best for: proving demand and workflows.</li>
+        </ul>
+        <h3>Wizard-of-Oz MVP</h3>
+        <ul>
+          <li>Looks automated, but is partially manual.</li>
+          <li>Best for: testing product experience without full build.</li>
+        </ul>
+        <h3>Landing page MVP</h3>
+        <ul>
+          <li>Measure interest through signups or intent.</li>
+          <li>Best for: early positioning and segment fit.</li>
+        </ul>
+        <h3>Prototype/demonstration MVP</h3>
+        <ul>
+          <li>Interactive mock or limited prototype.</li>
+          <li>Best for: usability and comprehension tests.</li>
+        </ul>
+        <p>Rule: MVP is “minimum” for learning, not “minimal quality.” Be honest about constraints.</p>
+      </section>
+
+      <section id="metrics">
+        <h2>Metrics that drive decisions (not vanity)</h2>
+        <h3>Actionable metrics</h3>
+        <ul>
+          <li>Behavior-based: activation, retention, repeat use, conversion.</li>
+          <li>Cohort-based: users who started in week N tracked over time.</li>
+          <li>Tied to a change: if we do X, metric Y should move.</li>
+        </ul>
+        <h3>Vanity metrics (use carefully)</h3>
+        <ul>
+          <li>Total users, total revenue, pageviews without segmentation.</li>
+          <li>They can hide churn and poor retention.</li>
+        </ul>
+        <h3>A lightweight framework</h3>
+        <ul>
+          <li><strong>Activation</strong>: % who reach the “aha moment”</li>
+          <li><strong>Retention</strong>: % who return/use weekly</li>
+          <li><strong>Referral</strong>: invites sent and conversion</li>
+          <li><strong>Revenue</strong>: conversion to paid and expansion</li>
+        </ul>
+      </section>
+
+      <section id="experiments">
+        <h2>Experiment design (one page)</h2>
+        <p>Use an “experiment card”:</p>
+        <ul>
+          <li>Hypothesis:</li>
+          <li>MVP type:</li>
+          <li>Target users:</li>
+          <li>Success metric + threshold:</li>
+          <li>Timebox:</li>
+          <li>Risks/ethics:</li>
+          <li>Owner:</li>
+          <li>Next decision if success:</li>
+          <li>Next decision if failure:</li>
+        </ul>
+      </section>
+
+      <section id="pivot">
+        <h2>Pivot vs persevere</h2>
+        <h3>Pivot signals</h3>
+        <ul>
+          <li>Strong interest but poor retention → value not delivered.</li>
+          <li>Retention but no growth channel → distribution problem.</li>
+          <li>Engagement only in a narrow segment → repositioning needed.</li>
+        </ul>
+        <h3>Common pivot types</h3>
+        <ul>
+          <li>Zoom-in (one feature becomes the product)</li>
+          <li>Zoom-out (product becomes a feature)</li>
+          <li>Customer segment (different users)</li>
+          <li>Customer need (different problem)</li>
+          <li>Channel (different distribution)</li>
+          <li>Revenue model (pricing/monetization change)</li>
+          <li>Technology/platform (different implementation)</li>
+        </ul>
+        <h3>Decision rule</h3>
+        <ul>
+          <li>Before you run experiments, define: <code>if metric ≥ threshold by date → persevere</code>.</li>
+          <li>Define: <code>if metric &lt; threshold → pivot (or stop)</code>.</li>
+        </ul>
+      </section>
+
+      <section id="continuous">
+        <h2>Continuous improvement (process, not just product)</h2>
+        <h3>“Five whys” for recurring failures</h3>
+        <ul>
+          <li>When something breaks repeatedly, ask “why?” five times.</li>
+          <li>Fix the system cause (tooling, training, process), not just the symptom.</li>
+        </ul>
+      </section>
+
+      <section id="plan">
+        <h2>A 6-week lean cycle (practical cadence)</h2>
+        <h3>Week 1 — Problem clarity</h3>
+        <ul>
+          <li>Interview users; identify top 3 pains.</li>
+          <li>Write 3 value hypotheses and pick one to test.</li>
+        </ul>
+        <h3>Week 2 — MVP build</h3>
+        <ul>
+          <li>Build the smallest testable version (or run concierge).</li>
+          <li>Prepare measurement and instrumentation.</li>
+        </ul>
+        <h3>Week 3 — Run the test</h3>
+        <ul>
+          <li>Recruit target users; observe behavior.</li>
+          <li>Collect metrics; log qualitative notes tied to hypotheses.</li>
+        </ul>
+        <h3>Week 4 — Analyze and decide</h3>
+        <ul>
+          <li>Compare results to thresholds.</li>
+          <li>Choose: iterate, pivot, or stop.</li>
+        </ul>
+        <h3>Week 5 — Strengthen growth</h3>
+        <ul>
+          <li>Test one growth hypothesis (channel or referral).</li>
+          <li>Track cohort results; avoid totals-only reporting.</li>
+        </ul>
+        <h3>Week 6 — Systemize learning</h3>
+        <ul>
+          <li>Update the experiment backlog.</li>
+          <li>Improve measurement; publish a short learning report.</li>
+        </ul>
+      </section>
+
+      <section id="exercises">
+        <h2>Exercises</h2>
+        <h3>Exercise 1 — Write three hypotheses</h3>
+        <p>For each, include:</p>
+        <ul>
+          <li>user segment</li>
+          <li>behavior</li>
+          <li>metric</li>
+          <li>threshold</li>
+          <li>timebox</li>
+        </ul>
+        <h3>Exercise 2 — Pick an MVP</h3>
+        <ul>
+          <li>Choose one MVP pattern and explain why it is the minimum needed to learn.</li>
+          <li>List what you deliberately will <em>not</em> build yet.</li>
+        </ul>
+        <h3>Exercise 3 — Define pivot criteria</h3>
+        <ul>
+          <li>Write one condition for persevere and one for pivot.</li>
+        </ul>
+      </section>
+
+      <section id="quiz">
+        <h2>Quiz (self-check)</h2>
+        <ol>
+          <li>What is validated learning?</li>
+          <li>Give one example of a value hypothesis and its metric.</li>
+          <li>Why are cohorts useful?</li>
+          <li>What is an MVP’s primary purpose?</li>
+          <li>Name two pivot types and when you might use them.</li>
+        </ol>
+        <h3>Answer key (short)</h3>
+        <ol>
+          <li>Learning proven by evidence that informs decisions.</li>
+          <li>Example: “40% of users complete onboarding” measured by completion rate.</li>
+          <li>Cohorts reveal retention and behavior over time instead of totals.</li>
+          <li>To test a hypothesis with minimal effort and time.</li>
+          <li>Customer segment pivot when a different user group shows stronger fit; channel pivot when acquisition doesn’t work.</li>
+        </ol>
+      </section>
+    </main>
+  </body>
+</html>
