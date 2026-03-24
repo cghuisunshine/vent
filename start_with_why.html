@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start with Why — Summary & Exam Practice</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --line: #e5e7eb;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --soft: #eff6ff;
+      --ok-bg: #ecfdf5;
+      --ok-text: #166534;
+      --bad-bg: #fef2f2;
+      --bad-text: #991b1b;
+      --btn: #2563eb;
+      --btn-hover: #1d4ed8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      scroll-behavior: smooth;
+    }
+    .wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    .page-grid {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .nav-column {
+      position: sticky;
+      top: 20px;
+    }
+    .nav-panel {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 20px 18px;
+      backdrop-filter: blur(12px);
+    }
+    .nav-title {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+    .nav-group + .nav-group {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    .nav-label {
+      margin: 0 0 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .nav-links {
+      display: grid;
+      gap: 8px;
+    }
+    .nav-links a {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 9px 10px;
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
+    .nav-links a:hover {
+      border-color: #bfdbfe;
+      background: var(--soft);
+      color: var(--accent);
+    }
+    .content-column {
+      min-width: 0;
+    }
+    .hero, .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .card {
+      padding: 24px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+    }
+    .subtitle {
+      color: var(--muted);
+      margin: 0;
+    }
+    .section-title {
+      font-size: 1.45rem;
+      margin: 0 0 16px;
+      color: var(--accent);
+    }
+    .chapter {
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+    }
+    .chapter:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+    .keyline {
+      background: var(--soft);
+      border-left: 4px solid var(--accent);
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin-top: 16px;
+    }
+    .tag {
+      display: inline-block;
+      background: var(--soft);
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .quiz-intro {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .question-card {
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+    }
+    .question-card:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+    .choices {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .question-actions {
+      margin-top: 12px;
+    }
+    .choice {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      cursor: pointer;
+    }
+    .choice:hover {
+      background: #fafcff;
+    }
+    .choice input {
+      margin-top: 4px;
+    }
+    .choice-letter {
+      font-weight: 700;
+      min-width: 24px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 18px 0 10px;
+    }
+    button {
+      border: none;
+      background: var(--btn);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: var(--btn-hover);
+    }
+    .secondary {
+      background: #64748b;
+    }
+    .secondary:hover {
+      background: #475569;
+    }
+    .scorebox {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      font-weight: 700;
+    }
+    .feedback {
+      margin-top: 10px;
+      font-weight: 700;
+    }
+    .feedback.correct { color: var(--ok-text); }
+    .feedback.incorrect { color: var(--bad-text); }
+    .explanation {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+    }
+    .question-card.correct .choice.correct-choice {
+      background: var(--ok-bg);
+      border-color: #86efac;
+    }
+    .question-card.incorrect .choice.correct-choice {
+      background: var(--ok-bg);
+      border-color: #86efac;
+    }
+    .question-card.incorrect .choice.user-wrong {
+      background: var(--bad-bg);
+      border-color: #fca5a5;
+    }
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    @media (max-width: 980px) {
+      .page-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-column {
+        position: static;
+      }
+      .nav-links {
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      }
+    }
+    @media (max-width: 700px) {
+      .wrap { padding: 18px 14px 40px; }
+      .hero, .card { padding: 18px; }
+      h1 { font-size: 1.6rem; }
+      .controls { flex-direction: column; }
+      button { width: 100%; }
+      .nav-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="page-grid">
+      <aside class="nav-column">
+        <nav class="nav-panel" aria-label="Page navigation">
+          <h2 class="nav-title">Quick Navigation</h2>
+
+          <div class="nav-group">
+            <p class="nav-label">Overview</p>
+            <div class="nav-links">
+              <a href="#top">Top</a>
+              <a href="#concise-summary">Concise Summary</a>
+              <a href="#chapter-summary">Chapter Summary</a>
+              <a href="#quiz-card">Exam Practice</a>
+            </div>
+          </div>
+
+          <div class="nav-group">
+            <p class="nav-label">Chapters</p>
+            <div class="nav-links">
+              <a href="#chapter-introduction">Introduction</a>
+              <a href="#chapter-1">Chapter 1</a>
+              <a href="#chapter-2">Chapter 2</a>
+              <a href="#chapter-3">Chapter 3</a>
+              <a href="#chapter-4">Chapter 4</a>
+              <a href="#chapter-5">Chapter 5</a>
+              <a href="#chapter-6">Chapter 6</a>
+              <a href="#chapter-7">Chapter 7</a>
+              <a href="#chapter-8">Chapter 8</a>
+              <a href="#chapter-9">Chapter 9</a>
+              <a href="#chapter-10">Chapter 10</a>
+              <a href="#chapter-11">Chapter 11</a>
+              <a href="#chapter-12">Chapter 12</a>
+              <a href="#chapter-13">Chapter 13</a>
+              <a href="#chapter-14">Chapter 14</a>
+            </div>
+          </div>
+        </nav>
+      </aside>
+
+      <main class="content-column">
+        <section class="hero" id="top">
+          <h1>Start with Why — Summary & Exam Practice</h1>
+          <p class="subtitle">Built in the same style as the Lean Startup template: concise overview first, then chapter-by-chapter summary, followed by a self-graded quiz.</p>
+        </section>
+
+        <section class="card" id="concise-summary">
+          <h2 class="section-title">Concise Summary</h2>
+          <p><em>Start with Why</em> argues that inspiring leaders and organizations communicate from the inside out: they begin with <strong>WHY</strong> they exist, then explain <strong>HOW</strong> they act, and only then show <strong>WHAT</strong> they do. Simon Sinek says people are not mainly loyal because of features, price, or rational comparisons. Instead, they are drawn to beliefs, purpose, and a sense of belonging.</p>
+          <p>The book’s central model is the <strong>Golden Circle</strong>: <strong>WHY</strong> is purpose or cause, <strong>HOW</strong> is the set of values or methods that bring that cause to life, and <strong>WHAT</strong> is the product, service, or visible result. Most organizations communicate from the outside in, starting with WHAT. Inspiring leaders reverse the order and start with WHY.</p>
+          <p>Sinek contrasts <strong>manipulation</strong> with <strong>inspiration</strong>. Discounts, promotions, fear, peer pressure, and novelty can influence behavior in the short term, but they do not create lasting trust or loyalty. Starting with WHY creates stronger commitment because people feel they are joining a cause rather than merely making a transaction.</p>
+          <p>The book also explains that clarity of WHY is not enough by itself. Leaders need the discipline to align their actions with that purpose and the consistency to communicate it repeatedly. When WHY becomes fuzzy, organizations can drift into chasing money, scale, or efficiency while losing the original belief that made them meaningful.</p>
+          <div class="keyline">
+            <strong>In one sentence:</strong> <em>Start with Why</em> teaches that lasting leadership and loyalty come from clearly expressing a purpose people believe in, then proving it consistently through action.
+          </div>
+        </section>
+
+        <section class="card" id="chapter-summary">
+          <h2 class="section-title">Chapter-by-Chapter Summary</h2>
+
+          <div class="chapter" id="chapter-introduction"><h3>Introduction — Why Start with Why?</h3><p>Sinek introduces the book’s main claim: some leaders and organizations inspire because they think, act, and communicate in a consistent pattern. Their success is not mainly about better resources, better credentials, or better tactics. It comes from starting with purpose—the deeper reason they exist—and using that as the basis for leadership.</p></div>
+          <div class="chapter" id="chapter-1"><h3>Chapter 1 — Assume You Know</h3><p>This chapter warns that people often make decisions based on incomplete assumptions. Sinek shows that when we think we already understand success, failure, or customer behavior, we may build our decisions on false foundations. Great leadership begins by questioning assumptions and looking for deeper causes instead of surface explanations.</p></div>
+          <div class="chapter" id="chapter-2"><h3>Chapter 2 — Carrots and Sticks</h3><p>Sinek explains that many organizations rely on manipulation to influence behavior. Price cuts, promotions, fear, aspiration, peer pressure, and novelty may drive short-term action, but they rarely build loyalty. He argues that manipulations can produce transactions, while inspiration produces commitment.</p></div>
+          <div class="chapter" id="chapter-3"><h3>Chapter 3 — The Golden Circle</h3><p>This chapter introduces the book’s core framework. The Golden Circle has three layers: WHY, HOW, and WHAT. Most people and companies communicate from WHAT to WHY, but inspiring leaders start with WHY and move outward. The order matters because people respond more strongly to belief and purpose than to features alone.</p></div>
+          <div class="chapter" id="chapter-4"><h3>Chapter 4 — This Is Not Opinion, This Is Biology</h3><p>Sinek connects the Golden Circle to how the brain works. He argues that the outer part of the circle, WHAT, aligns with rational and language-based processing, while WHY and HOW relate more closely to the parts of the brain involved in feelings, trust, and decision-making. This helps explain why people often decide emotionally and then rationalize later.</p></div>
+          <div class="chapter" id="chapter-5"><h3>Chapter 5 — Clarity, Discipline and Consistency</h3><p>To turn purpose into lasting leadership, organizations need three things. First, they must be clear about WHY they exist. Second, they need discipline so their HOWs reflect that WHY. Third, they need consistency so every product, action, and message proves the purpose. When these are aligned, trust can grow.</p></div>
+          <div class="chapter" id="chapter-6"><h3>Chapter 6 — The Emergence of Trust</h3><p>This chapter explains that trust is created when people see repeated alignment between words and actions. Trust is not built by a checklist or a single promise. It develops when a leader or organization repeatedly demonstrates that its decisions are guided by values larger than self-interest.</p></div>
+          <div class="chapter" id="chapter-7"><h3>Chapter 7 — How a Tipping Point Tips</h3><p>Sinek applies the diffusion of innovations idea to leadership and communication. He argues that innovators and early adopters are most likely to respond to WHY because they buy what the cause represents, not only the practical features. Once enough believers adopt first, broader market momentum becomes possible.</p></div>
+          <div class="chapter" id="chapter-8"><h3>Chapter 8 — Start with WHY, but Know HOW</h3><p>Purpose alone is not enough. Leaders who are strong in WHY often need people around them who can translate belief into repeatable systems and action. This chapter highlights the relationship between visionary purpose and practical execution.</p></div>
+          <div class="chapter" id="chapter-9"><h3>Chapter 9 — Know WHY. Know HOW. Then WHAT?</h3><p>Once WHY and HOW are clear, the WHAT becomes an authentic expression of both. Products, services, policies, and marketing should all serve as proof of the underlying belief. This chapter argues that visible outputs should be the final result of purpose and method, not the starting point.</p></div>
+          <div class="chapter" id="chapter-10"><h3>Chapter 10 — Communication Is Not About Speaking, It’s About Listening</h3><p>Sinek emphasizes that effective communication depends on resonance, not just clarity of speech. People hear messages through the filter of their own beliefs. The strongest communication happens when leaders express a WHY that listeners already feel but may not have been able to articulate themselves.</p></div>
+          <div class="chapter" id="chapter-11"><h3>Chapter 11 — When WHY Goes Fuzzy</h3><p>Success can blur purpose. As organizations grow, they may become more focused on metrics, products, and expansion than on the original cause that inspired people. This chapter explains how losing clarity about WHY weakens decisions, loyalty, and culture.</p></div>
+          <div class="chapter" id="chapter-12"><h3>Chapter 12 — Split Happens</h3><p>Here Sinek shows how organizations can fracture when the founder’s purpose is no longer strongly connected to everyday leadership. Structures may remain, but the animating belief fades. The result is often a split between what the organization says and what it actually does.</p></div>
+          <div class="chapter" id="chapter-13"><h3>Chapter 13 — The Origins of a WHY</h3><p>This chapter turns to discovery. A WHY is not invented as a slogan; it usually comes from a person’s history, experiences, values, and worldview. Sinek encourages leaders to uncover the deeper source of what they believe rather than copy someone else’s language.</p></div>
+          <div class="chapter" id="chapter-14"><h3>Chapter 14 — The New Competition</h3><p>The book ends by redefining competition. Instead of focusing only on beating rivals through better features or lower prices, organizations should compete by being clearer and more faithful to their purpose. In that sense, the real contest is not just market share, but who can inspire deeper trust and belonging.</p></div>
+
+          <div class="keyline">
+            <strong>Main takeaway:</strong> People do not become deeply loyal to an organization just because it offers a good product. They commit when its actions consistently express a purpose they believe in.
+          </div>
+        </section>
+
+        <section class="card" id="quiz-card">
+          <h2 class="section-title">Self-Graded Exam Practice</h2>
+          <p class="quiz-intro">Choose one answer for each question, then press <strong>Submit Quiz</strong>. The page will score the quiz, mark correct and incorrect choices, and show short explanations.</p>
+
+          <div class="tag">Part 1 — Core Concepts</div>
+
+          <div class="question-card" data-answer="1">
+            <h3>1. According to <em>Start with Why</em>, what do inspiring leaders usually communicate first?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q0" value="0"><span class="choice-letter">A.</span><span>What they sell</span></label>
+              <label class="choice"><input type="radio" name="q0" value="1"><span class="choice-letter">B.</span><span>Why they exist</span></label>
+              <label class="choice"><input type="radio" name="q0" value="2"><span class="choice-letter">C.</span><span>How much they cost</span></label>
+              <label class="choice"><input type="radio" name="q0" value="3"><span class="choice-letter">D.</span><span>Who their competitors are</span></label>
+            </div>
+            <div class="feedback" id="feedback-0"></div>
+            <div class="explanation" id="explanation-0" hidden><strong>Explanation:</strong> Sinek’s main argument is that inspiring leaders start with WHY, not with products, features, or prices.</div>
+          </div>
+
+          <div class="question-card" data-answer="2">
+            <h3>2. In the Golden Circle, which sequence best reflects Sinek’s model from the inside outward?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q1" value="0"><span class="choice-letter">A.</span><span>WHAT → WHY → HOW</span></label>
+              <label class="choice"><input type="radio" name="q1" value="1"><span class="choice-letter">B.</span><span>HOW → WHAT → WHY</span></label>
+              <label class="choice"><input type="radio" name="q1" value="2"><span class="choice-letter">C.</span><span>WHY → HOW → WHAT</span></label>
+              <label class="choice"><input type="radio" name="q1" value="3"><span class="choice-letter">D.</span><span>WHY → WHAT → HOW</span></label>
+            </div>
+            <div class="feedback" id="feedback-1"></div>
+            <div class="explanation" id="explanation-1" hidden><strong>Explanation:</strong> The Golden Circle starts with WHY, moves to HOW, and ends with WHAT.</div>
+          </div>
+
+          <div class="question-card" data-answer="3">
+            <h3>3. Which of the following is an example of manipulation rather than inspiration in Sinek’s framework?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q2" value="0"><span class="choice-letter">A.</span><span>Helping customers feel part of a shared belief</span></label>
+              <label class="choice"><input type="radio" name="q2" value="1"><span class="choice-letter">B.</span><span>Communicating a clear long-term cause</span></label>
+              <label class="choice"><input type="radio" name="q2" value="2"><span class="choice-letter">C.</span><span>Aligning actions with values over time</span></label>
+              <label class="choice"><input type="radio" name="q2" value="3"><span class="choice-letter">D.</span><span>Offering a discount to pressure a quick purchase</span></label>
+            </div>
+            <div class="feedback" id="feedback-2"></div>
+            <div class="explanation" id="explanation-2" hidden><strong>Explanation:</strong> Price promotions are one of Sinek’s main examples of manipulation—effective in the short term, but weak for lasting loyalty.</div>
+          </div>
+
+          <div class="question-card" data-answer="0">
+            <h3>4. Why does Sinek say people often buy from certain companies even when alternatives are similar in quality and price?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q3" value="0"><span class="choice-letter">A.</span><span>Because they identify with what the company believes</span></label>
+              <label class="choice"><input type="radio" name="q3" value="1"><span class="choice-letter">B.</span><span>Because they always compare all specifications objectively</span></label>
+              <label class="choice"><input type="radio" name="q3" value="2"><span class="choice-letter">C.</span><span>Because people usually prefer the most complex product</span></label>
+              <label class="choice"><input type="radio" name="q3" value="3"><span class="choice-letter">D.</span><span>Because rational analysis always dominates human choices</span></label>
+            </div>
+            <div class="feedback" id="feedback-3"></div>
+            <div class="explanation" id="explanation-3" hidden><strong>Explanation:</strong> Sinek argues that people buy into beliefs and belonging, then use rational facts to justify the decision afterward.</div>
+          </div>
+
+          <div class="question-card" data-answer="2">
+            <h3>5. What does Sinek mean by saying “communication is not about speaking, it’s about listening”?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q4" value="0"><span class="choice-letter">A.</span><span>Leaders should talk less and stay silent most of the time</span></label>
+              <label class="choice"><input type="radio" name="q4" value="1"><span class="choice-letter">B.</span><span>Only market research matters</span></label>
+              <label class="choice"><input type="radio" name="q4" value="2"><span class="choice-letter">C.</span><span>A message works when listeners feel it matches what they already believe</span></label>
+              <label class="choice"><input type="radio" name="q4" value="3"><span class="choice-letter">D.</span><span>Communication should avoid emotional meaning</span></label>
+            </div>
+            <div class="feedback" id="feedback-4"></div>
+            <div class="explanation" id="explanation-4" hidden><strong>Explanation:</strong> Sinek’s point is that meaning is completed by the listener. Strong communication resonates with beliefs people already hold.</div>
+          </div>
+
+          <div class="question-card" data-answer="1">
+            <h3>6. Which statement best describes HOW in the Golden Circle?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q5" value="0"><span class="choice-letter">A.</span><span>The detailed price list of all products</span></label>
+              <label class="choice"><input type="radio" name="q5" value="1"><span class="choice-letter">B.</span><span>The values, principles, or methods that bring the WHY to life</span></label>
+              <label class="choice"><input type="radio" name="q5" value="2"><span class="choice-letter">C.</span><span>The emotional reaction of customers only</span></label>
+              <label class="choice"><input type="radio" name="q5" value="3"><span class="choice-letter">D.</span><span>The visible products and services</span></label>
+            </div>
+            <div class="feedback" id="feedback-5"></div>
+            <div class="explanation" id="explanation-5" hidden><strong>Explanation:</strong> HOW refers to the methods and values through which an organization expresses its purpose.</div>
+          </div>
+
+          <div class="question-card" data-answer="0">
+            <h3>7. Which example best shows consistency between WHY and WHAT?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q6" value="0"><span class="choice-letter">A.</span><span>A company says it values creativity and then designs products that genuinely empower individual expression</span></label>
+              <label class="choice"><input type="radio" name="q6" value="1"><span class="choice-letter">B.</span><span>A company changes its message every month to chase trends</span></label>
+              <label class="choice"><input type="radio" name="q6" value="2"><span class="choice-letter">C.</span><span>A company relies only on rebates and coupons</span></label>
+              <label class="choice"><input type="radio" name="q6" value="3"><span class="choice-letter">D.</span><span>A company hides its values and speaks only about features</span></label>
+            </div>
+            <div class="feedback" id="feedback-6"></div>
+            <div class="explanation" id="explanation-6" hidden><strong>Explanation:</strong> Consistency means the visible outputs of the company serve as believable proof of its deeper purpose.</div>
+          </div>
+
+          <div class="question-card" data-answer="2">
+            <h3>8. Why are innovators and early adopters important in Sinek’s discussion of market momentum?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q7" value="0"><span class="choice-letter">A.</span><span>They only buy products after mass-market approval</span></label>
+              <label class="choice"><input type="radio" name="q7" value="1"><span class="choice-letter">B.</span><span>They care only about low prices</span></label>
+              <label class="choice"><input type="radio" name="q7" value="2"><span class="choice-letter">C.</span><span>They are more willing to buy based on shared belief before the majority follows</span></label>
+              <label class="choice"><input type="radio" name="q7" value="3"><span class="choice-letter">D.</span><span>They remove the need for trust</span></label>
+            </div>
+            <div class="feedback" id="feedback-7"></div>
+            <div class="explanation" id="explanation-7" hidden><strong>Explanation:</strong> Early believers help create the tipping point because they adopt for reasons of identity and belief, not just mainstream proof.</div>
+          </div>
+
+          <div class="tag">Part 2 — Deeper Understanding</div>
+
+          <div class="question-card" data-answer="1">
+            <h3>9. A company says, “We make reliable tools so workers can take pride in doing honest, excellent work.” In that sentence, the phrase after “so” is mainly expressing its:</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q8" value="0"><span class="choice-letter">A.</span><span>WHAT</span></label>
+              <label class="choice"><input type="radio" name="q8" value="1"><span class="choice-letter">B.</span><span>WHY</span></label>
+              <label class="choice"><input type="radio" name="q8" value="2"><span class="choice-letter">C.</span><span>Discount strategy</span></label>
+              <label class="choice"><input type="radio" name="q8" value="3"><span class="choice-letter">D.</span><span>Operational weakness</span></label>
+            </div>
+            <div class="feedback" id="feedback-8"></div>
+            <div class="explanation" id="explanation-8" hidden><strong>Explanation:</strong> The deeper belief or cause—why the company exists—is expressed in the purpose beyond the product itself.</div>
+          </div>
+
+          <div class="question-card" data-answer="3">
+            <h3>10. Which situation best illustrates “when WHY goes fuzzy”?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q9" value="0"><span class="choice-letter">A.</span><span>A company refines its mission language to be clearer</span></label>
+              <label class="choice"><input type="radio" name="q9" value="1"><span class="choice-letter">B.</span><span>A founder trains leaders to protect the culture</span></label>
+              <label class="choice"><input type="radio" name="q9" value="2"><span class="choice-letter">C.</span><span>A team removes a confusing feature to stay aligned with purpose</span></label>
+              <label class="choice"><input type="radio" name="q9" value="3"><span class="choice-letter">D.</span><span>An organization becomes successful and then starts chasing profit with no clear connection to its original cause</span></label>
+            </div>
+            <div class="feedback" id="feedback-9"></div>
+            <div class="explanation" id="explanation-9" hidden><strong>Explanation:</strong> WHY becomes fuzzy when success shifts attention away from purpose and toward external measures alone.</div>
+          </div>
+
+          <div class="question-card" data-answer="0">
+            <h3>11. What is the strongest long-term result of leading with WHY according to Sinek?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q10" value="0"><span class="choice-letter">A.</span><span>Trust and loyalty that continue beyond short-term incentives</span></label>
+              <label class="choice"><input type="radio" name="q10" value="1"><span class="choice-letter">B.</span><span>A guarantee that competitors disappear</span></label>
+              <label class="choice"><input type="radio" name="q10" value="2"><span class="choice-letter">C.</span><span>The end of all operational problems</span></label>
+              <label class="choice"><input type="radio" name="q10" value="3"><span class="choice-letter">D.</span><span>Immediate mass-market dominance in every case</span></label>
+            </div>
+            <div class="feedback" id="feedback-10"></div>
+            <div class="explanation" id="explanation-10" hidden><strong>Explanation:</strong> Sinek repeatedly argues that inspiration builds loyalty and trust, unlike manipulation, which often fades quickly.</div>
+          </div>
+
+          <div class="question-card" data-answer="2">
+            <h3>12. Why does Sinek discuss biology in Chapter 4?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q11" value="0"><span class="choice-letter">A.</span><span>To claim leadership is genetically fixed and cannot be learned</span></label>
+              <label class="choice"><input type="radio" name="q11" value="1"><span class="choice-letter">B.</span><span>To argue that facts are always more important than feelings</span></label>
+              <label class="choice"><input type="radio" name="q11" value="2"><span class="choice-letter">C.</span><span>To explain why purpose-driven communication connects with the emotional parts of decision-making</span></label>
+              <label class="choice"><input type="radio" name="q11" value="3"><span class="choice-letter">D.</span><span>To prove all customers think identically</span></label>
+            </div>
+            <div class="feedback" id="feedback-11"></div>
+            <div class="explanation" id="explanation-11" hidden><strong>Explanation:</strong> His biology argument is meant to support the claim that WHY connects with trust, feeling, and decisions more deeply than feature lists do.</div>
+          </div>
+
+          <div class="question-card" data-answer="1">
+            <h3>13. A founder is excellent at expressing vision but weak at systems and execution. According to the book, what is most needed?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q12" value="0"><span class="choice-letter">A.</span><span>More discounts and promotions</span></label>
+              <label class="choice"><input type="radio" name="q12" value="1"><span class="choice-letter">B.</span><span>Strong HOW-oriented partners who can translate belief into action</span></label>
+              <label class="choice"><input type="radio" name="q12" value="2"><span class="choice-letter">C.</span><span>Less clarity about mission</span></label>
+              <label class="choice"><input type="radio" name="q12" value="3"><span class="choice-letter">D.</span><span>A larger advertising budget only</span></label>
+            </div>
+            <div class="feedback" id="feedback-12"></div>
+            <div class="explanation" id="explanation-12" hidden><strong>Explanation:</strong> Sinek emphasizes that WHY-led people often need HOW-led partners to make the vision repeatable and operational.</div>
+          </div>
+
+          <div class="question-card" data-answer="0">
+            <h3>14. Which statement best captures the difference between a transaction and a following?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q13" value="0"><span class="choice-letter">A.</span><span>A transaction can be created by incentives, but a following grows from shared belief and trust</span></label>
+              <label class="choice"><input type="radio" name="q13" value="1"><span class="choice-letter">B.</span><span>Transactions and followings are exactly the same</span></label>
+              <label class="choice"><input type="radio" name="q13" value="2"><span class="choice-letter">C.</span><span>A following depends only on product novelty</span></label>
+              <label class="choice"><input type="radio" name="q13" value="3"><span class="choice-letter">D.</span><span>A transaction always produces long-term devotion</span></label>
+            </div>
+            <div class="feedback" id="feedback-13"></div>
+            <div class="explanation" id="explanation-13" hidden><strong>Explanation:</strong> One of the book’s central contrasts is short-term influence versus deeper, belief-based loyalty.</div>
+          </div>
+
+          <div class="question-card" data-answer="3">
+            <h3>15. If a company wants its products to serve as proof of its purpose, what should it do first?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q14" value="0"><span class="choice-letter">A.</span><span>Copy a competitor’s slogan</span></label>
+              <label class="choice"><input type="radio" name="q14" value="1"><span class="choice-letter">B.</span><span>Launch more features immediately</span></label>
+              <label class="choice"><input type="radio" name="q14" value="2"><span class="choice-letter">C.</span><span>Offer a dramatic rebate campaign</span></label>
+              <label class="choice"><input type="radio" name="q14" value="3"><span class="choice-letter">D.</span><span>Become clear about WHY and align HOW before expanding WHAT</span></label>
+            </div>
+            <div class="feedback" id="feedback-14"></div>
+            <div class="explanation" id="explanation-14" hidden><strong>Explanation:</strong> WHAT should be the result of a clear WHY supported by disciplined HOWs, not the starting point.</div>
+          </div>
+
+          <div class="question-card" data-answer="2">
+            <h3>16. What is the “new competition” at the end of the book mainly about?</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="q15" value="0"><span class="choice-letter">A.</span><span>Who can release the most features each month</span></label>
+              <label class="choice"><input type="radio" name="q15" value="1"><span class="choice-letter">B.</span><span>Who can create the biggest fear-based campaign</span></label>
+              <label class="choice"><input type="radio" name="q15" value="2"><span class="choice-letter">C.</span><span>Who can stay most faithful to a purpose that inspires trust and belonging</span></label>
+              <label class="choice"><input type="radio" name="q15" value="3"><span class="choice-letter">D.</span><span>Who can hide their WHY most effectively</span></label>
+            </div>
+            <div class="feedback" id="feedback-15"></div>
+            <div class="explanation" id="explanation-15" hidden><strong>Explanation:</strong> Sinek reframes competition around authenticity, trust, and purpose rather than pure feature or price battles.</div>
+          </div>
+
+          <div class="controls">
+            <button id="submitBtn" type="button">Submit Quiz</button>
+            <button id="resetBtn" type="button" class="secondary">Reset Quiz</button>
+          </div>
+
+          <div class="scorebox" id="scorebox">Score: Not submitted yet.</div>
+
+          <p class="footer">Source basis: the uploaded <em>Start with Why</em> PDF and the uploaded <em>lean_startup.html</em> template.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const totalQuestions = 16;
+      const submitBtn = document.getElementById('submitBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const scorebox = document.getElementById('scorebox');
+      const cards = Array.from(document.querySelectorAll('.question-card'));
+
+      function clearCardState(card, index) {
+        card.classList.remove('correct', 'incorrect');
+        card.querySelectorAll('.choice').forEach(choice => {
+          choice.classList.remove('correct-choice', 'user-wrong');
+        });
+        const feedback = document.getElementById(`feedback-${index}`);
+        const explanation = document.getElementById(`explanation-${index}`);
+        feedback.textContent = '';
+        feedback.className = 'feedback';
+        explanation.hidden = true;
+      }
+
+      function clearState() {
+        cards.forEach((card, index) => {
+          clearCardState(card, index);
+        });
+      }
+
+      function gradeCard(card, index) {
+        clearCardState(card, index);
+
+        const answer = Number(card.dataset.answer);
+        const selected = card.querySelector(`input[name="q${index}"]:checked`);
+        const feedback = document.getElementById(`feedback-${index}`);
+        const explanation = document.getElementById(`explanation-${index}`);
+        const choices = Array.from(card.querySelectorAll('.choice'));
+
+        choices.forEach((choice, idx) => {
+          if (idx === answer) choice.classList.add('correct-choice');
+        });
+
+        if (!selected) {
+          card.classList.add('incorrect');
+          feedback.textContent = 'No answer selected.';
+          feedback.classList.add('incorrect');
+          explanation.hidden = false;
+          return { correct: false, unanswered: true };
+        }
+
+        const selectedIndex = Number(selected.value);
+        if (selectedIndex === answer) {
+          card.classList.add('correct');
+          feedback.textContent = 'Correct.';
+          feedback.classList.add('correct');
+          explanation.hidden = false;
+          return { correct: true, unanswered: false };
+        }
+
+        card.classList.add('incorrect');
+        feedback.textContent = 'Incorrect.';
+        feedback.classList.add('incorrect');
+        choices[selectedIndex].classList.add('user-wrong');
+        explanation.hidden = false;
+        return { correct: false, unanswered: false };
+      }
+
+      cards.forEach((card, index) => {
+        const actions = document.createElement('div');
+        actions.className = 'question-actions';
+
+        const checkBtn = document.createElement('button');
+        checkBtn.type = 'button';
+        checkBtn.className = 'secondary';
+        checkBtn.textContent = 'Check This Question';
+        checkBtn.addEventListener('click', () => {
+          gradeCard(card, index);
+        });
+
+        actions.appendChild(checkBtn);
+        card.querySelector('.choices').insertAdjacentElement('afterend', actions);
+      });
+
+      submitBtn.addEventListener('click', () => {
+        let correct = 0;
+        let unanswered = 0;
+
+        cards.forEach((card, index) => {
+          const result = gradeCard(card, index);
+          if (result.correct) correct++;
+          if (result.unanswered) unanswered++;
+        });
+
+        const percent = Math.round((correct / totalQuestions) * 100);
+        scorebox.textContent = `Score: ${correct} / ${totalQuestions} (${percent}%). Unanswered: ${unanswered}.`;
+      });
+
+      resetBtn.addEventListener('click', () => {
+        document.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
+        clearState();
+        scorebox.textContent = 'Score: Not submitted yet.';
+      });
+    })();
+  </script>
+</body>
+</html>
