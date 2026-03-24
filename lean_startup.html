@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Lean Startup — Summary & Exam Practice</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --line: #e5e7eb;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --soft: #eff6ff;
+      --ok-bg: #ecfdf5;
+      --ok-text: #166534;
+      --bad-bg: #fef2f2;
+      --bad-text: #991b1b;
+      --btn: #2563eb;
+      --btn-hover: #1d4ed8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      scroll-behavior: smooth;
+    }
+    .wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    .page-grid {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .nav-column {
+      position: sticky;
+      top: 20px;
+    }
+    .nav-panel {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 20px 18px;
+      backdrop-filter: blur(12px);
+    }
+    .nav-title {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+    .nav-group + .nav-group {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    .nav-label {
+      margin: 0 0 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .nav-links {
+      display: grid;
+      gap: 8px;
+    }
+    .nav-links a {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 9px 10px;
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
+    .nav-links a:hover {
+      border-color: #bfdbfe;
+      background: var(--soft);
+      color: var(--accent);
+    }
+    .content-column {
+      min-width: 0;
+    }
+    .hero, .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .card {
+      padding: 24px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+    }
+    .subtitle {
+      color: var(--muted);
+      margin: 0;
+    }
+    .section-title {
+      font-size: 1.45rem;
+      margin: 0 0 16px;
+      color: var(--accent);
+    }
+    .chapter {
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+    }
+    .chapter:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+    .keyline {
+      background: var(--soft);
+      border-left: 4px solid var(--accent);
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin-top: 16px;
+    }
+    .tag {
+      display: inline-block;
+      background: var(--soft);
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .quiz-intro {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .question-card {
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+    }
+    .question-card:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+    .choices {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .choice {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      cursor: pointer;
+    }
+    .choice:hover {
+      background: #fafcff;
+    }
+    .choice input {
+      margin-top: 4px;
+    }
+    .choice-letter {
+      font-weight: 700;
+      min-width: 24px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 18px 0 10px;
+    }
+    button {
+      border: none;
+      background: var(--btn);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: var(--btn-hover);
+    }
+    .secondary {
+      background: #64748b;
+    }
+    .secondary:hover {
+      background: #475569;
+    }
+    .scorebox {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      font-weight: 700;
+    }
+    .feedback {
+      margin-top: 10px;
+      font-weight: 700;
+    }
+    .feedback.correct { color: var(--ok-text); }
+    .feedback.incorrect { color: var(--bad-text); }
+    .explanation {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+    }
+    .question-card.correct .choice.correct-choice {
+      background: var(--ok-bg);
+      border-color: #86efac;
+    }
+    .question-card.incorrect .choice.correct-choice {
+      background: var(--ok-bg);
+      border-color: #86efac;
+    }
+    .question-card.incorrect .choice.user-wrong {
+      background: var(--bad-bg);
+      border-color: #fca5a5;
+    }
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    @media (max-width: 980px) {
+      .page-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-column {
+        position: static;
+      }
+      .nav-links {
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      }
+    }
+    @media (max-width: 700px) {
+      .wrap { padding: 18px 14px 40px; }
+      .hero, .card { padding: 18px; }
+      h1 { font-size: 1.6rem; }
+      .controls { flex-direction: column; }
+      button { width: 100%; }
+      .nav-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="page-grid">
+      <aside class="nav-column">
+        <nav class="nav-panel" aria-label="Page navigation">
+          <h2 class="nav-title">Quick Navigation</h2>
+
+          <div class="nav-group">
+            <p class="nav-label">Overview</p>
+            <div class="nav-links">
+              <a href="#top">Top</a>
+              <a href="#concise-summary">Concise Summary</a>
+              <a href="#chapter-summary">Chapter Summary</a>
+              <a href="#quiz-card">Exam Practice</a>
+            </div>
+          </div>
+
+          <div class="nav-group">
+            <p class="nav-label">Chapters</p>
+            <div class="nav-links">
+              <a href="#chapter-introduction">Introduction</a>
+              <a href="#chapter-1">Chapter 1</a>
+              <a href="#chapter-2">Chapter 2</a>
+              <a href="#chapter-3">Chapter 3</a>
+              <a href="#chapter-4">Chapter 4</a>
+              <a href="#chapter-5">Chapter 5</a>
+              <a href="#chapter-6">Chapter 6</a>
+              <a href="#chapter-7">Chapter 7</a>
+              <a href="#chapter-8">Chapter 8</a>
+              <a href="#chapter-9">Chapter 9</a>
+              <a href="#chapter-10">Chapter 10</a>
+              <a href="#chapter-11">Chapter 11</a>
+              <a href="#chapter-12">Chapter 12</a>
+              <a href="#chapter-13">Chapter 13</a>
+            </div>
+          </div>
+        </nav>
+      </aside>
+
+      <main class="content-column">
+    <section class="hero" id="top">
+      <h1>The Lean Startup — Summary & Exam Practice</h1>
+      <p class="subtitle">A concise overview first, then a chapter-by-chapter summary, followed by a real self-graded exam-style quiz.</p>
+    </section>
+
+    <section class="card" id="concise-summary">
+      <h2 class="section-title">Concise Summary</h2>
+      <p><em>The Lean Startup</em> argues that startups usually fail not because founders lack talent or effort, but because they build products before proving that customers actually want them. Eric Ries says a startup should be treated as a learning system operating under extreme uncertainty, and its job is to discover a sustainable business model as quickly as possible.</p>
+      <p>Its core idea is the <strong>Build–Measure–Learn</strong> loop: create a <strong>minimum viable product (MVP)</strong>, test it with real customers, measure behavior, and then decide whether to <strong>pivot</strong> or <strong>persevere</strong>. Instead of judging progress by how much work was done, Ries says startups should use <strong>validated learning</strong>—evidence that they are learning what customers truly value.</p>
+      <p>Ries also argues that <strong>entrepreneurship is management</strong>, but not traditional corporate management. Startups need a different style of management suited to uncertainty, experimentation, and fast iteration. He emphasizes <strong>innovation accounting</strong>, meaning teams should use metrics and milestones that show whether they are moving toward a real business, not just building features.</p>
+      <p>The book is organized into three parts: <strong>Vision</strong>, which explains startup thinking and validated learning; <strong>Steer</strong>, which covers MVPs, measurement, and pivoting; and <strong>Accelerate</strong>, which focuses on scaling, small batches, adaptive processes, and maintaining innovation even inside large companies.</p>
+      <div class="keyline">
+        <strong>In one sentence:</strong> <em>The Lean Startup</em> teaches that the fastest path to building a successful business is to test assumptions early, learn from real customer behavior, and adapt quickly instead of relying on detailed long-term plans.
+      </div>
+    </section>
+
+    <section class="card" id="chapter-summary">
+      <h2 class="section-title">Chapter-by-Chapter Summary</h2>
+
+      <div class="chapter" id="chapter-introduction"><h3>Introduction</h3><p>Ries introduces the core Lean Startup ideas: entrepreneurs operate under extreme uncertainty, progress should be measured by <strong>validated learning</strong>, startups should move through <strong>Build–Measure–Learn</strong>, and they need <strong>innovation accounting</strong> instead of traditional progress measures. He argues that startups fail when they rely too much on planning and forecasting, or when they replace management with chaos.</p></div>
+      <div class="chapter" id="chapter-1"><h3>Chapter 1 — Start</h3><p>This chapter argues that entrepreneurship is not random creativity; it is a form of management. A startup is an organization built to create something new under conditions of extreme uncertainty, so it needs discipline, experiments, and a way to learn quickly.</p></div>
+      <div class="chapter" id="chapter-2"><h3>Chapter 2 — Define</h3><p>Ries broadens the meaning of “startup.” It is not limited to small tech companies in garages; large companies can also contain startup teams when they are searching for new growth in uncertain conditions. The key point is that startup methods apply anywhere innovation is uncertain.</p></div>
+      <div class="chapter" id="chapter-3"><h3>Chapter 3 — Learn</h3><p>This chapter introduces <strong>validated learning</strong> as the real measure of startup progress. Instead of asking whether the team is busy or shipping features, the better question is whether it is learning what customers truly want and whether a sustainable business can be built.</p></div>
+      <div class="chapter" id="chapter-4"><h3>Chapter 4 — Experiment</h3><p>Ries says startups should treat their ideas as hypotheses and test them scientifically. A startup is not mainly executing a fixed plan; it is running experiments to test whether its vision matches real customer behavior.</p></div>
+      <div class="chapter" id="chapter-5"><h3>Chapter 5 — Leap</h3><p>Here he focuses on <strong>leap-of-faith assumptions</strong>—the risky beliefs on which the whole business depends. The two most important are usually the <strong>value hypothesis</strong> and the <strong>growth hypothesis</strong>. Before building too much, founders should identify these assumptions clearly.</p></div>
+      <div class="chapter" id="chapter-6"><h3>Chapter 6 — Test</h3><p>This chapter explains the <strong>minimum viable product (MVP)</strong>. An MVP is the simplest version of a product that allows a real turn through Build–Measure–Learn. Its purpose is not to impress people with polish; its purpose is to generate real customer feedback with minimum effort and time.</p></div>
+      <div class="chapter" id="chapter-7"><h3>Chapter 7 — Measure</h3><p>Ries introduces <strong>innovation accounting</strong>. Startups need metrics that reveal whether experiments are producing real progress, not “vanity metrics” that only look impressive. Good metrics help teams understand customer behavior and decide what to improve next.</p></div>
+      <div class="chapter" id="chapter-8"><h3>Chapter 8 — Pivot (or Persevere)</h3><p>After measuring results, founders must decide whether to stay the course or make a major strategic change. A <strong>pivot</strong> means changing direction while keeping what has been learned. Ries presents this as one of the hardest but most important startup decisions.</p></div>
+      <div class="chapter" id="chapter-9"><h3>Chapter 9 — Batch</h3><p>Part Three begins with speed. Ries argues that <strong>small batches</strong> help startups learn faster, reduce waste, and avoid large investments in things customers may not want. Releasing and testing in smaller units improves flow and shortens feedback cycles.</p></div>
+      <div class="chapter" id="chapter-10"><h3>Chapter 10 — Grow</h3><p>This chapter explains that sustainable growth usually comes from one of three <strong>engines of growth</strong>: <strong>paid</strong>, <strong>viral</strong>, or <strong>sticky</strong>. A startup should identify which engine fits its business and then focus its effort on improving the key drivers of that engine.</p></div>
+      <div class="chapter" id="chapter-11"><h3>Chapter 11 — Adapt</h3><p>Ries argues that startups should build adaptive processes as they grow, without becoming bureaucratic. The goal is disciplined speed: using methods like lean process thinking and root-cause analysis while still protecting learning and experimentation.</p></div>
+      <div class="chapter" id="chapter-12"><h3>Chapter 12 — Innovate</h3><p>This chapter looks at how larger organizations can keep innovating. Ries argues that innovation does not have to disappear as companies grow, but it requires the right structure: startup teams need secure but limited resources, independence, and meaningful incentives tied to outcomes.</p></div>
+      <div class="chapter" id="chapter-13"><h3>Chapter 13 — Epilogue: Waste Not</h3><p>The book closes by expanding Lean Startup from a company method into a broader movement. Ries argues that entrepreneurship, education, research, and even capital markets should better support long-term innovation and learning rather than short-term vanity metrics.</p></div>
+
+      <div class="keyline">
+        <strong>Main takeaway:</strong> Do not spend years building based on assumptions. Identify the riskiest assumptions, build the smallest test possible, measure real customer behavior, and use that learning to decide what to do next.
+      </div>
+    </section>
+
+    <section class="card" id="quiz-card">
+      <h2 class="section-title">Self-Graded Exam Practice</h2>
+      <p class="quiz-intro">Choose one answer for each question, then press <strong>Submit Quiz</strong>. The page will score the exam, mark correct and incorrect choices, and show explanations.</p>
+
+      <div class="tag">Part 1 — Core Concepts</div>
+      
+      <div class="question-card" data-answer="1">
+        <h3>1. A founder spends six months building features before showing the product to customers. Which Lean Startup principle is being neglected most directly?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q0" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Innovation accounting</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q0" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Build–Measure–Learn</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q0" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Sticky growth</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q0" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Small-batch production</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-0"></div>
+        <div class="explanation" id="explanation-0" hidden>
+          <strong>Explanation:</strong> The core mistake is delaying real customer feedback instead of moving quickly through the Build–Measure–Learn cycle.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="1">
+        <h3>2. A team launches a stripped-down version of its app to test whether users will pay for faster reporting. In Lean Startup terms, this release is best described as what?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q1" value="0">
+          <span class="choice-letter">A.</span>
+          <span>A pivot</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q1" value="1">
+          <span class="choice-letter">B.</span>
+          <span>An MVP</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q1" value="2">
+          <span class="choice-letter">C.</span>
+          <span>A vanity metric</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q1" value="3">
+          <span class="choice-letter">D.</span>
+          <span>A growth engine</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-1"></div>
+        <div class="explanation" id="explanation-1" hidden>
+          <strong>Explanation:</strong> An MVP is the smallest version of a product that can test an important assumption.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="1">
+        <h3>3. After analyzing customer behavior, a startup learns that users like the technology but not the current target market. What is the most appropriate next step?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q2" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Persevere with the same market</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q2" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Pivot while keeping the learning gained</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q2" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Stop all product development permanently</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q2" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Increase advertising without changing strategy</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-2"></div>
+        <div class="explanation" id="explanation-2" hidden>
+          <strong>Explanation:</strong> The evidence suggests the team learned something useful, but its direction should change.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="2">
+        <h3>4. Which result would best count as validated learning for an early-stage startup?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q3" value="0">
+          <span class="choice-letter">A.</span>
+          <span>The founders feel more confident after a meeting</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q3" value="1">
+          <span class="choice-letter">B.</span>
+          <span>The team finishes the product roadmap</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q3" value="2">
+          <span class="choice-letter">C.</span>
+          <span>A test shows customers repeatedly use and pay for the feature</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q3" value="3">
+          <span class="choice-letter">D.</span>
+          <span>The company publishes a detailed five-year forecast</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-3"></div>
+        <div class="explanation" id="explanation-3" hidden>
+          <strong>Explanation:</strong> Validated learning comes from real customer behavior, not internal opinions or planning documents.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="1">
+        <h3>5. A manager reports that total page views doubled, but the company still cannot tell whether new users are staying or buying. Why is this metric weak?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q4" value="0">
+          <span class="choice-letter">A.</span>
+          <span>It is too expensive to calculate</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q4" value="1">
+          <span class="choice-letter">B.</span>
+          <span>It is a vanity metric with little decision value</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q4" value="2">
+          <span class="choice-letter">C.</span>
+          <span>It measures retention too precisely</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q4" value="3">
+          <span class="choice-letter">D.</span>
+          <span>It proves the product has failed</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-4"></div>
+        <div class="explanation" id="explanation-4" hidden>
+          <strong>Explanation:</strong> Vanity metrics may look impressive but do not clearly help the team decide what to do next.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="1">
+        <h3>6. According to Eric Ries, which statement best explains why entrepreneurship is a form of management?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q5" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Startups mainly need strict bureaucracy</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q5" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Startups operate under uncertainty and require disciplined learning</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q5" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Management matters only after profitability</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q5" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Entrepreneurship is mostly about motivating sales teams</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-5"></div>
+        <div class="explanation" id="explanation-5" hidden>
+          <strong>Explanation:</strong> Ries argues that startups need a special kind of management suited to uncertainty and experimentation.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="0">
+        <h3>7. A company wants to know whether customers find its product valuable before spending heavily on growth. Which assumption should it test first?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q6" value="0">
+          <span class="choice-letter">A.</span>
+          <span>The value hypothesis</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q6" value="1">
+          <span class="choice-letter">B.</span>
+          <span>The office expansion plan</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q6" value="2">
+          <span class="choice-letter">C.</span>
+          <span>The tax structure</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q6" value="3">
+          <span class="choice-letter">D.</span>
+          <span>The long-term branding slogan</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-6"></div>
+        <div class="explanation" id="explanation-6" hidden>
+          <strong>Explanation:</strong> Before growth matters, the startup must first test whether the product creates real value for customers.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="1">
+        <h3>8. Which action best reflects the Lean Startup approach to progress?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q7" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Measure work by number of features completed</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q7" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Measure progress by what experiments reveal about customers</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q7" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Measure success by how detailed the original plan is</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q7" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Measure performance only after the full launch</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-7"></div>
+        <div class="explanation" id="explanation-7" hidden>
+          <strong>Explanation:</strong> Lean Startup ties progress to validated learning, not simply to output.
+        </div>
+      </div>
+    
+
+      <div class="tag" style="margin-top:22px;">Part 2 — Details & Application</div>
+      
+      <div class="question-card" data-answer="1">
+        <h3>9. A subscription product grows mainly when existing users continue renewing each month. Which engine of growth is most relevant?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q8" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Viral</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q8" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Sticky</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q8" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Paid</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q8" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Seasonal</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-8"></div>
+        <div class="explanation" id="explanation-8" hidden>
+          <strong>Explanation:</strong> Sticky growth depends on retention—customers staying and continuing to use the product.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="1">
+        <h3>10. A startup ships changes in very small increments rather than waiting for a large quarterly release. What is the main Lean Startup advantage of this choice?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q9" value="0">
+          <span class="choice-letter">A.</span>
+          <span>It eliminates all risk</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q9" value="1">
+          <span class="choice-letter">B.</span>
+          <span>It shortens feedback cycles and reduces waste</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q9" value="2">
+          <span class="choice-letter">C.</span>
+          <span>It guarantees higher revenue immediately</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q9" value="3">
+          <span class="choice-letter">D.</span>
+          <span>It removes the need for prioritization</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-9"></div>
+        <div class="explanation" id="explanation-9" hidden>
+          <strong>Explanation:</strong> Small batches make learning faster and reduce the cost of building the wrong thing.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="0">
+        <h3>11. Which example best illustrates a leap-of-faith assumption?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q10" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Customers will return often enough for the business to grow sustainably</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q10" value="1">
+          <span class="choice-letter">B.</span>
+          <span>The team prefers a blue logo to a green one</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q10" value="2">
+          <span class="choice-letter">C.</span>
+          <span>The office lease should be renewed for two years</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q10" value="3">
+          <span class="choice-letter">D.</span>
+          <span>The CEO wants weekly status meetings</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-10"></div>
+        <div class="explanation" id="explanation-10" hidden>
+          <strong>Explanation:</strong> A leap-of-faith assumption is a risky belief that the business model depends on.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="1">
+        <h3>12. A startup discovers through testing that customers love one feature but ignore the rest of the product. Which pivot would be most plausible?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q11" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Channel pivot</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q11" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Zoom-in pivot</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q11" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Technology pivot</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q11" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Platform pivot</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-11"></div>
+        <div class="explanation" id="explanation-11" hidden>
+          <strong>Explanation:</strong> In a zoom-in pivot, one feature becomes the whole product focus.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="1">
+        <h3>13. Why does Ries argue that large companies can still use Lean Startup methods?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q12" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Because all large firms are already startups</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q12" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Because innovation under uncertainty exists inside big organizations too</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q12" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Because large firms no longer need management systems</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q12" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Because product-market fit is irrelevant at scale</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-12"></div>
+        <div class="explanation" id="explanation-12" hidden>
+          <strong>Explanation:</strong> Lean Startup applies wherever teams are trying to innovate under uncertain conditions.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="1">
+        <h3>14. What is the strongest reason to use innovation accounting instead of traditional performance measures in a startup?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q13" value="0">
+          <span class="choice-letter">A.</span>
+          <span>It makes investor presentations look more complex</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q13" value="1">
+          <span class="choice-letter">B.</span>
+          <span>It shows whether experiments are moving the business toward a sustainable model</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q13" value="2">
+          <span class="choice-letter">C.</span>
+          <span>It focuses only on short-term profit</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q13" value="3">
+          <span class="choice-letter">D.</span>
+          <span>It avoids collecting customer data</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-13"></div>
+        <div class="explanation" id="explanation-13" hidden>
+          <strong>Explanation:</strong> Innovation accounting is meant to measure real experimental progress, not surface-level activity.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="1">
+        <h3>15. An internal startup team in a large company is given limited protected funding, freedom to experiment, and clear accountability for outcomes. This setup reflects which Lean Startup idea?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q14" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Large-batch production</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q14" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Entrepreneurial management inside established firms</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q14" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Eliminating customer testing</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q14" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Replacing strategy with improvisation</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-14"></div>
+        <div class="explanation" id="explanation-14" hidden>
+          <strong>Explanation:</strong> Ries argues that innovative teams inside large firms need autonomy, protected resources, and accountability.
+        </div>
+      </div>
+    
+      <div class="question-card" data-answer="1">
+        <h3>16. After an experiment, the data clearly shows that users are not receiving enough value, yet the founders continue unchanged because they like the original vision. Which Lean Startup mistake are they making?</h3>
+        <div class="choices">
+          
+        <label class="choice">
+          <input type="radio" name="q15" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Using small batches too often</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q15" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Ignoring evidence instead of deciding whether to pivot or persevere</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q15" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Focusing too much on retention</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q15" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Relying excessively on viral growth</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-15"></div>
+        <div class="explanation" id="explanation-15" hidden>
+          <strong>Explanation:</strong> Measurement should lead to a real decision. Ignoring evidence breaks the Lean Startup process.
+        </div>
+      </div>
+    
+
+      <div class="controls">
+        <button id="submitBtn" type="button">Submit Quiz</button>
+        <button id="resetBtn" type="button" class="secondary">Reset Quiz</button>
+      </div>
+
+      <div class="scorebox" id="scorebox">Score: Not submitted yet.</div>
+    </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const totalQuestions = 16;
+      const submitBtn = document.getElementById('submitBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const scorebox = document.getElementById('scorebox');
+      const cards = Array.from(document.querySelectorAll('.question-card'));
+
+      function clearState() {
+        cards.forEach((card, index) => {
+          card.classList.remove('correct', 'incorrect');
+          card.querySelectorAll('.choice').forEach(choice => {
+            choice.classList.remove('correct-choice', 'user-wrong');
+          });
+          const feedback = document.getElementById(`feedback-${index}`);
+          const explanation = document.getElementById(`explanation-${index}`);
+          feedback.textContent = '';
+          feedback.className = 'feedback';
+          explanation.hidden = true;
+        });
+      }
+
+      submitBtn.addEventListener('click', () => {
+        clearState();
+        let correct = 0;
+        let unanswered = 0;
+
+        cards.forEach((card, index) => {
+          const answer = Number(card.dataset.answer);
+          const selected = card.querySelector(`input[name="q${index}"]:checked`);
+          const feedback = document.getElementById(`feedback-${index}`);
+          const explanation = document.getElementById(`explanation-${index}`);
+          const choices = Array.from(card.querySelectorAll('.choice'));
+
+          choices.forEach((choice, idx) => {
+            if (idx === answer) choice.classList.add('correct-choice');
+          });
+
+          if (!selected) {
+            unanswered++;
+            card.classList.add('incorrect');
+            feedback.textContent = 'No answer selected.';
+            feedback.classList.add('incorrect');
+            explanation.hidden = false;
+            return;
+          }
+
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === answer) {
+            correct++;
+            card.classList.add('correct');
+            feedback.textContent = 'Correct.';
+            feedback.classList.add('correct');
+          } else {
+            card.classList.add('incorrect');
+            feedback.textContent = 'Incorrect.';
+            feedback.classList.add('incorrect');
+            choices[selectedIndex].classList.add('user-wrong');
+          }
+          explanation.hidden = false;
+        });
+
+        const percent = Math.round((correct / totalQuestions) * 100);
+        scorebox.textContent = `Score: ${correct} / ${totalQuestions} (${percent}%). Unanswered: ${unanswered}.`;
+      });
+
+      resetBtn.addEventListener('click', () => {
+        document.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
+        clearState();
+        scorebox.textContent = 'Score: Not submitted yet.';
+      });
+    })();
+  </script>
+</body>
+</html>
