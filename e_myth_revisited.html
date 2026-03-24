@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The E-Myth Revisited — Summary & Exam Practice</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --line: #e5e7eb;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --soft: #eff6ff;
+      --ok-bg: #ecfdf5;
+      --ok-text: #166534;
+      --bad-bg: #fef2f2;
+      --bad-text: #991b1b;
+      --btn: #2563eb;
+      --btn-hover: #1d4ed8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      scroll-behavior: smooth;
+    }
+    .wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    .page-grid {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .nav-column {
+      position: sticky;
+      top: 20px;
+    }
+    .nav-panel {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 20px 18px;
+      backdrop-filter: blur(12px);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    .nav-title {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+    .nav-group + .nav-group {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    .nav-label {
+      margin: 0 0 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .nav-links {
+      display: grid;
+      gap: 8px;
+    }
+    .nav-links a {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 9px 10px;
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
+    .nav-links a:hover {
+      border-color: #bfdbfe;
+      background: var(--soft);
+      color: var(--accent);
+    }
+    .content-column {
+      min-width: 0;
+    }
+    .hero, .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .card {
+      padding: 24px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+    }
+    .subtitle {
+      color: var(--muted);
+      margin: 0;
+    }
+    .section-title {
+      font-size: 1.45rem;
+      margin: 0 0 16px;
+      color: var(--accent);
+    }
+    .chapter {
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+    }
+    .chapter:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+    .keyline {
+      background: var(--soft);
+      border-left: 4px solid var(--accent);
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin-top: 16px;
+    }
+    .tag {
+      display: inline-block;
+      background: var(--soft);
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .quiz-intro {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .question-card {
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+    }
+    .question-card:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+    .choices {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .question-actions {
+      margin-top: 12px;
+    }
+    .choice {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      cursor: pointer;
+    }
+    .choice:hover {
+      background: #fafcff;
+    }
+    .choice input {
+      margin-top: 4px;
+    }
+    .choice-letter {
+      font-weight: 700;
+      min-width: 24px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 18px 0 10px;
+    }
+    button {
+      border: none;
+      background: var(--btn);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: var(--btn-hover);
+    }
+    .secondary {
+      background: #64748b;
+    }
+    .secondary:hover {
+      background: #475569;
+    }
+    .scorebox {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      font-weight: 700;
+    }
+    .feedback {
+      margin-top: 10px;
+      font-weight: 700;
+    }
+    .feedback.correct { color: var(--ok-text); }
+    .feedback.incorrect { color: var(--bad-text); }
+    .explanation {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+    }
+    .question-card.correct .choice.correct-choice {
+      background: var(--ok-bg);
+      border-color: #86efac;
+    }
+    .question-card.incorrect .choice.correct-choice {
+      background: var(--ok-bg);
+      border-color: #86efac;
+    }
+    .question-card.incorrect .choice.user-wrong {
+      background: var(--bad-bg);
+      border-color: #fca5a5;
+    }
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    @media (max-width: 980px) {
+      .page-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-column {
+        position: static;
+      }
+      .nav-links {
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      }
+      .nav-panel {
+        max-height: none;
+      }
+    }
+    @media (max-width: 700px) {
+      .wrap { padding: 18px 14px 40px; }
+      .hero, .card { padding: 18px; }
+      h1 { font-size: 1.6rem; }
+      .controls { flex-direction: column; }
+      button { width: 100%; }
+      .nav-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="page-grid">
+      <aside class="nav-column">
+        <nav class="nav-panel" aria-label="Page navigation">
+          <h2 class="nav-title">Quick Navigation</h2>
+
+          <div class="nav-group">
+            <p class="nav-label">Overview</p>
+            <div class="nav-links">
+              <a href="#top">Top</a>
+              <a href="#concise-summary">Concise Summary</a>
+              <a href="#key-ideas">Key Ideas</a>
+              <a href="#chapter-summary">Chapter Summary</a>
+              <a href="#quiz-card">Exam Practice</a>
+            </div>
+          </div>
+
+          <div class="nav-group">
+            <p class="nav-label">Part I</p>
+            <div class="nav-links">
+              <a href="#ch1">Ch. 1</a>
+<a href="#ch2">Ch. 2</a>
+<a href="#ch3">Ch. 3</a>
+<a href="#ch4">Ch. 4</a>
+<a href="#ch5">Ch. 5</a>
+<a href="#ch6">Ch. 6</a>
+            </div>
+          </div>
+
+          <div class="nav-group">
+            <p class="nav-label">Part II</p>
+            <div class="nav-links">
+              <a href="#ch7">Ch. 7</a>
+<a href="#ch8">Ch. 8</a>
+<a href="#ch9">Ch. 9</a>
+            </div>
+          </div>
+
+          <div class="nav-group">
+            <p class="nav-label">Part III</p>
+            <div class="nav-links">
+              <a href="#ch10">Ch. 10</a>
+<a href="#ch11">Ch. 11</a>
+<a href="#ch12">Ch. 12</a>
+<a href="#ch13">Ch. 13</a>
+<a href="#ch14">Ch. 14</a>
+<a href="#ch15">Ch. 15</a>
+<a href="#ch16">Ch. 16</a>
+<a href="#ch17">Ch. 17</a>
+<a href="#ch18">Ch. 18</a>
+<a href="#ch19">Ch. 19</a>
+            </div>
+          </div>
+        </nav>
+      </aside>
+
+      <main class="content-column">
+        <section class="hero" id="top">
+          <h1>The E-Myth Revisited — Summary & Exam Practice</h1>
+          <p class="subtitle">A quick overview, a chapter-by-chapter guide, then a self-graded quiz (same format as your Lean Startup template).</p>
+        </section>
+
+        <section class="card" id="concise-summary">
+          <h2 class="section-title">Concise Summary</h2>
+          <p><em>The E‑Myth Revisited</em> explains why many small businesses struggle even when the owner is talented and hardworking: owners often start as <strong>technicians</strong> who love (and excel at) the technical work, then assume running a business is simply “doing that work, but for myself.” Gerber calls this the <strong>Fatal Assumption</strong>, and argues it’s a major driver of chaos, burnout, and inconsistent results.</p>
+          <p>The remedy is to shift from <strong>working in the business</strong> (doing the technical work) to <strong>working on the business</strong>—designing a business that produces predictable results through clear roles, standards, and systems. Gerber proposes building your business as a <strong>Franchise Prototype</strong>: even if you never franchise, you design the business as if it must be replicated thousands of times with consistent quality.</p>
+          <div class="keyline">
+            <strong>In one sentence:</strong> Build systems that make success repeatable—so your business can deliver results without depending on your constant heroics.
+          </div>
+        </section>
+
+        <section class="card" id="key-ideas">
+          <h2 class="section-title">Key Ideas (Fast Review)</h2>
+          <ul>
+            <li><strong>E‑Myth:</strong> Most small businesses aren’t started by entrepreneurs—they’re started by technicians seeking independence.</li>
+            <li><strong>Three roles in one owner:</strong> Entrepreneur (vision), Manager (order), Technician (doing).</li>
+            <li><strong>Business life cycle:</strong> Infancy → Adolescence → Maturity.</li>
+            <li><strong>Management by abdication vs delegation:</strong> handing off work without structure creates more chaos.</li>
+            <li><strong>Franchise Prototype:</strong> the system runs the business; people run the system.</li>
+            <li><strong>Business Development Process:</strong> Innovation → Quantification → Orchestration.</li>
+            <li><strong>Business Development Program (7 steps):</strong> Primary Aim, Strategic Objective, Organizational, Management, People, Marketing, Systems strategies.</li>
+          </ul>
+        </section>
+
+        <section class="card" id="chapter-summary">
+          <h2 class="section-title">Chapter-by-Chapter Summary</h2>
+          
+      <div class="chapter" id="ch1">
+        <h3>Chapter 1 — The Entrepreneurial Myth</h3>
+        <ul>
+          <li>Introduces the &#x27;E‑Myth&#x27;: the romantic idea that most small businesses are started by entrepreneurs.</li><li>Explains the &#x27;Entrepreneurial Seizure&#x27; and the &#x27;Fatal Assumption&#x27;—being good at the technical work doesn’t mean you can run a business that delivers it.</li><li>Uses Sarah’s pie-shop story to show how a business can turn a craft you love into exhausting, chaotic work.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch2">
+        <h3>Chapter 2 — The Entrepreneur, the Manager, and the Technician</h3>
+        <ul>
+          <li>Argues every owner contains three competing roles: the Entrepreneur (vision), the Manager (order), and the Technician (doing).</li><li>Most small-business owners are Technician‑heavy, so the business is run like a job rather than a system.</li><li>Sets up why internal conflict (and imbalance) drives confusion and burnout.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch3">
+        <h3>Chapter 3 — Infancy: The Technician’s Phase</h3>
+        <ul>
+          <li>Describes the first stage of the business life cycle: the owner does everything and the early hustle feels freeing.</li><li>Infancy ends when the workload exceeds what one person can do—your business becomes &#x27;the boss&#x27; again.</li><li>Owners either quit, stay stuck, or move into Adolescence by seeking help.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch4">
+        <h3>Chapter 4 — Adolescence: Getting Some Help</h3>
+        <ul>
+          <li>Adolescence begins when you hire help—usually technical help first.</li><li>Warns against &#x27;management by abdication&#x27; (handing off work without structure) versus true delegation with standards and accountability.</li><li>Shows why adding people without systems often increases chaos instead of reducing it.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch5">
+        <h3>Chapter 5 — Beyond the Comfort Zone</h3>
+        <ul>
+          <li>As the business grows, it pushes beyond the owner’s &#x27;comfort zone&#x27;—their ability to personally control what’s happening.</li><li>Explains why technicians often retreat (get small again), gamble (go for broke), or endure stress (hang on) when growth gets messy.</li><li>Makes the case that sustainable growth requires shifting from doing work to designing how work gets done.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch6">
+        <h3>Chapter 6 — Maturity and the Entrepreneurial Perspective</h3>
+        <ul>
+          <li>Defines maturity as designing a business that can reliably produce results without depending on the owner’s constant heroics.</li><li>Argues mature companies &#x27;start out that way&#x27; by acting from day one as the future business must operate.</li><li>Introduces the Entrepreneurial Perspective: envision the finished business, define how it must behave, and begin behaving that way immediately.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch7">
+        <h3>Chapter 7 — The Turn‑Key Revolution</h3>
+        <ul>
+          <li>Explains why Business Format Franchises succeed: they standardize how work is done so results are predictable.</li><li>Frames franchising as a method for turning a business into a repeatable system—not just a brand name.</li><li>Positions &#x27;turn‑key&#x27; thinking as the engine behind scale and consistency.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch8">
+        <h3>Chapter 8 — The Franchise Prototype</h3>
+        <ul>
+          <li>Introduces the Franchise Prototype: a working model of the business that can be replicated.</li><li>Emphasizes testing assumptions in the prototype before scaling them into operations.</li><li>Captures the core idea: the system runs the business; people run the system.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch9">
+        <h3>Chapter 9 — Working On Your Business, Not In It</h3>
+        <ul>
+          <li>Argues your business exists to serve your life—not the other way around.</li><li>Asks you to &#x27;pretend you will franchise&#x27; so you design the business as a model for thousands of identical copies.</li><li>Transitions into the Business Development Program: systematically building the business as a prototype.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch10">
+        <h3>Chapter 10 — The Business Development Process</h3>
+        <ul>
+          <li>Defines a continuous cycle of improving the business through three integrated activities: Innovation, Quantification, and Orchestration.</li><li>Innovation: create better ways to do work; Quantification: measure impact; Orchestration: standardize so results are repeatable.</li><li>Shows how this cycle turns improvement into a disciplined practice instead of occasional firefighting.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch11">
+        <h3>Chapter 11 — Your Business Development Program</h3>
+        <ul>
+          <li>Presents a step‑by‑step program for building the Franchise Prototype in a deliberate sequence.</li><li>Lays out seven steps: Primary Aim → Strategic Objective → Organizational Strategy → Management Strategy → People Strategy → Marketing Strategy → Systems Strategy.</li><li>Sets the stage for the rest of the book, where each step is explained in detail.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch12">
+        <h3>Chapter 12 — Your Primary Aim</h3>
+        <ul>
+          <li>Starts with you: clarify what you value and what kind of life you want to live.</li><li>Defines the Primary Aim as a guiding statement of the life you’re building—not merely goals for the business.</li><li>Uses the Primary Aim to keep business design aligned with meaning, not just revenue.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch13">
+        <h3>Chapter 13 — Your Strategic Objective</h3>
+        <ul>
+          <li>Translates your Primary Aim into a clear picture of what the business must achieve to support that life.</li><li>Defines standards for the finished business (what it looks like, how it performs, and what it delivers).</li><li>Creates the &#x27;north star&#x27; that informs every system and decision.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch14">
+        <h3>Chapter 14 — Your Organizational Strategy</h3>
+        <ul>
+          <li>Explains why even tiny companies need an organization chart: clarity of functions and accountability beats &#x27;organizing around personalities.&#x27;</li><li>Designs roles around what the business needs, not who happens to be available.</li><li>Builds a structure that supports growth and makes delegation possible.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch15">
+        <h3>Chapter 15 — Your Management Strategy</h3>
+        <ul>
+          <li>Argues you don’t need heroic managers; you need a management system built into the prototype.</li><li>Uses standards, processes, and feedback loops to reduce randomness and remove unnecessary decision‑making at the operating level.</li><li>Turns &#x27;people problems&#x27; into system design problems you can solve.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch16">
+        <h3>Chapter 16 — Your People Strategy</h3>
+        <ul>
+          <li>Reframes the goal: you can’t force people to perform; you design an environment where doing great work becomes normal.</li><li>Selects, trains, and rewards people to fit the prototype rather than improvising role-by-role.</li><li>Creates culture through consistent expectations and clear agreements.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch17">
+        <h3>Chapter 17 — Your Marketing Strategy</h3>
+        <ul>
+          <li>Starts and ends with the customer: understand what they value, how they decide, and what they experience.</li><li>Treats marketing as building trust through consistent signals—what customers see, hear, feel, and remember.</li><li>Connects marketing to operations: the promise must match the delivered experience.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch18">
+        <h3>Chapter 18 — Your Systems Strategy</h3>
+        <ul>
+          <li>Defines what a system is and why systems are the building blocks of a dependable business.</li><li>Breaks systems into three types: Hard Systems, Soft Systems, and Information Systems.</li><li>Shows how integrated systems create a business that works without constant improvisation.</li>
+        </ul>
+      </div>
+    
+      <div class="chapter" id="ch19">
+        <h3>Chapter 19 — A Letter to Sarah</h3>
+        <ul>
+          <li>Closes the dialogue with Sarah by tying the work back to freedom, purpose, and daily practice.</li><li>Encourages disciplined implementation—small steps, sustained over time.</li><li>Reinforces that building a great business is also a path to personal growth.</li>
+        </ul>
+      </div>
+    
+          <div class="keyline">
+            <strong>How to use this section:</strong> Skim the bullets before the quiz. If you miss a question, jump back to the relevant chapter anchor in the nav.
+          </div>
+        </section>
+
+        <section class="card" id="quiz-card">
+          <h2 class="section-title">Self-Graded Exam Practice</h2>
+          <p class="quiz-intro">Pick one answer per question, then press <strong>Submit Quiz</strong>. The page will score you, highlight the correct choice, and show explanations.</p>
+
+          <div class="tag">Practice Quiz — Core Concepts</div>
+
+          
+      <div class="question-card" data-answer="2">
+        <h3>1. In Gerber’s view, most small businesses are started by which group?</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q0" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Career investors hunting profit opportunities</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q0" value="1">
+          <span class="choice-letter">B.</span>
+          <span>True entrepreneurs driven by innovation</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q0" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Technicians who are good at a craft and want independence</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q0" value="3">
+          <span class="choice-letter">D.</span>
+          <span>MBAs applying formal management theory</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-0"></div>
+        <div class="explanation" id="explanation-0" hidden>
+          <strong>Explanation:</strong> The book argues many owners begin as technicians (craft/technical workers) who assume that technical skill equals business skill.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="2">
+        <h3>2. What is the &#x27;Fatal Assumption&#x27;?</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q1" value="0">
+          <span class="choice-letter">A.</span>
+          <span>If you price low, customers will always come</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q1" value="1">
+          <span class="choice-letter">B.</span>
+          <span>If you work harder, you will eventually succeed</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q1" value="2">
+          <span class="choice-letter">C.</span>
+          <span>If you understand the technical work, you understand the business that delivers it</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q1" value="3">
+          <span class="choice-letter">D.</span>
+          <span>If you hire experts, you can avoid learning management</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-1"></div>
+        <div class="explanation" id="explanation-1" hidden>
+          <strong>Explanation:</strong> Knowing how to do the work is not the same as knowing how to build and run a business that consistently does that work.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="1">
+        <h3>3. What does Gerber call the sudden urge to quit your job and start your own business?</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q2" value="0">
+          <span class="choice-letter">A.</span>
+          <span>The Growth Spurt</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q2" value="1">
+          <span class="choice-letter">B.</span>
+          <span>The Entrepreneurial Seizure</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q2" value="2">
+          <span class="choice-letter">C.</span>
+          <span>The Turn‑Key Trigger</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q2" value="3">
+          <span class="choice-letter">D.</span>
+          <span>The Franchise Breakout</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-2"></div>
+        <div class="explanation" id="explanation-2" hidden>
+          <strong>Explanation:</strong> He describes an &#x27;Entrepreneurial Seizure&#x27; that pushes technicians into business ownership.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="2">
+        <h3>4. The three internal roles in every owner are:</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q3" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Leader, Manager, Worker</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q3" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Visionary, Operator, Accountant</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q3" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Entrepreneur, Manager, Technician</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q3" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Founder, Investor, Employee</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-3"></div>
+        <div class="explanation" id="explanation-3" hidden>
+          <strong>Explanation:</strong> Gerber frames internal conflict as a three‑way tension: Entrepreneur (future), Manager (past/order), Technician (present/do).
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="1">
+        <h3>5. In the business life cycle, Infancy ends when:</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q4" value="0">
+          <span class="choice-letter">A.</span>
+          <span>You open a second location</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q4" value="1">
+          <span class="choice-letter">B.</span>
+          <span>The business needs more work than the owner can personally do</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q4" value="2">
+          <span class="choice-letter">C.</span>
+          <span>You have a formal org chart</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q4" value="3">
+          <span class="choice-letter">D.</span>
+          <span>You install a CRM system</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-4"></div>
+        <div class="explanation" id="explanation-4" hidden>
+          <strong>Explanation:</strong> Infancy ends when the owner realizes the business can’t continue running with them doing everything.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="0">
+        <h3>6. Adolescence begins when:</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q5" value="0">
+          <span class="choice-letter">A.</span>
+          <span>You decide to get some help (often by hiring technical help)</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q5" value="1">
+          <span class="choice-letter">B.</span>
+          <span>You create a franchise agreement</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q5" value="2">
+          <span class="choice-letter">C.</span>
+          <span>You raise outside capital</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q5" value="3">
+          <span class="choice-letter">D.</span>
+          <span>You stop doing technical work entirely</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-5"></div>
+        <div class="explanation" id="explanation-5" hidden>
+          <strong>Explanation:</strong> Adolescence begins at the decision to hire help—typically technical help first.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="1">
+        <h3>7. &#x27;Management by abdication&#x27; is best described as:</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q6" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Delegating with clear outcomes and standards</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q6" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Hiring someone and then disappearing, hoping they &#x27;handle it&#x27;</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q6" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Building a management system to remove discretion</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q6" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Replacing managers with software</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-6"></div>
+        <div class="explanation" id="explanation-6" hidden>
+          <strong>Explanation:</strong> It’s handing off responsibility without structure, standards, or accountability—often worsening chaos.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="1">
+        <h3>8. A business pushes beyond the owner’s &#x27;comfort zone&#x27; when:</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q7" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Revenue exceeds expenses for 3 months</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q7" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Growth exceeds the owner’s ability to personally control and supervise work</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q7" value="2">
+          <span class="choice-letter">C.</span>
+          <span>The owner stops marketing</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q7" value="3">
+          <span class="choice-letter">D.</span>
+          <span>The team adopts a new mission statement</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-7"></div>
+        <div class="explanation" id="explanation-7" hidden>
+          <strong>Explanation:</strong> Comfort zone is the boundary of personal control; growth forces a move from doing to designing systems.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="1">
+        <h3>9. Gerber argues maturity is:</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q8" value="0">
+          <span class="choice-letter">A.</span>
+          <span>An inevitable end stage after enough years</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q8" value="1">
+          <span class="choice-letter">B.</span>
+          <span>A perspective you design from the beginning by acting like the finished business</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q8" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Something that happens once you hire a general manager</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q8" value="3">
+          <span class="choice-letter">D.</span>
+          <span>A result of working longer hours</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-8"></div>
+        <div class="explanation" id="explanation-8" hidden>
+          <strong>Explanation:</strong> Maturity comes from the Entrepreneurial Perspective—designing and behaving like the intended finished business early.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="1">
+        <h3>10. The &#x27;Turn‑Key Revolution&#x27; is powered most by:</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q9" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Trade‑name licensing</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q9" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Business Format Franchising (systems + standards)</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q9" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Government subsidies for small firms</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q9" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Automation replacing staff</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-9"></div>
+        <div class="explanation" id="explanation-9" hidden>
+          <strong>Explanation:</strong> Gerber highlights Business Format Franchises as the model for predictable, scalable operations.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="2">
+        <h3>11. The Franchise Prototype is primarily:</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q10" value="0">
+          <span class="choice-letter">A.</span>
+          <span>A legal document that allows franchising</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q10" value="1">
+          <span class="choice-letter">B.</span>
+          <span>A marketing campaign to attract franchisees</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q10" value="2">
+          <span class="choice-letter">C.</span>
+          <span>A working model where the business is designed, tested, and made repeatable</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q10" value="3">
+          <span class="choice-letter">D.</span>
+          <span>A new product line for growth</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-10"></div>
+        <div class="explanation" id="explanation-10" hidden>
+          <strong>Explanation:</strong> It’s a testable, replicable model of the business—where assumptions are proven and processes are standardized.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="1">
+        <h3>12. Which phrase best captures the Franchise Prototype idea?</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q11" value="0">
+          <span class="choice-letter">A.</span>
+          <span>People run the business; systems are optional</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q11" value="1">
+          <span class="choice-letter">B.</span>
+          <span>The system runs the business; people run the system</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q11" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Marketing runs the business; operations follow</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q11" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Talent runs the business; processes follow</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-11"></div>
+        <div class="explanation" id="explanation-11" hidden>
+          <strong>Explanation:</strong> A dependable business relies on systems that make outcomes repeatable, with people executing the system.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="1">
+        <h3>13. The Business Development Process is built on:</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q12" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Hiring, Firing, Training</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q12" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Innovation, Quantification, Orchestration</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q12" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Planning, Forecasting, Budgeting</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q12" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Branding, Selling, Advertising</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-12"></div>
+        <div class="explanation" id="explanation-12" hidden>
+          <strong>Explanation:</strong> Innovate improvements, quantify results, then orchestrate (standardize) so outcomes are consistent.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="2">
+        <h3>14. Gerber’s Business Development Program has how many steps?</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q13" value="0">
+          <span class="choice-letter">A.</span>
+          <span>3</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q13" value="1">
+          <span class="choice-letter">B.</span>
+          <span>5</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q13" value="2">
+          <span class="choice-letter">C.</span>
+          <span>7</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q13" value="3">
+          <span class="choice-letter">D.</span>
+          <span>9</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-13"></div>
+        <div class="explanation" id="explanation-13" hidden>
+          <strong>Explanation:</strong> He lays out seven steps: Primary Aim, Strategic Objective, Organizational, Management, People, Marketing, and Systems strategies.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="1">
+        <h3>15. Your Primary Aim is best described as:</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q14" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Your quarterly sales target</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q14" value="1">
+          <span class="choice-letter">B.</span>
+          <span>A statement of the life you want and what you value most</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q14" value="2">
+          <span class="choice-letter">C.</span>
+          <span>A detailed org chart</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q14" value="3">
+          <span class="choice-letter">D.</span>
+          <span>A brand positioning slogan</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-14"></div>
+        <div class="explanation" id="explanation-14" hidden>
+          <strong>Explanation:</strong> Primary Aim starts with the owner’s values and desired life, not with business metrics.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="0">
+        <h3>16. Your Strategic Objective is:</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q15" value="0">
+          <span class="choice-letter">A.</span>
+          <span>A clear statement of what the business must do to support your Primary Aim</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q15" value="1">
+          <span class="choice-letter">B.</span>
+          <span>A list of tasks employees must complete today</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q15" value="2">
+          <span class="choice-letter">C.</span>
+          <span>A competitor analysis</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q15" value="3">
+          <span class="choice-letter">D.</span>
+          <span>A fundraising plan</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-15"></div>
+        <div class="explanation" id="explanation-15" hidden>
+          <strong>Explanation:</strong> Strategic Objective translates your life aims into what the finished business must deliver and how it must perform.
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="1">
+        <h3>17. The three kinds of systems in a business are:</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q16" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Sales, Service, Operations</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q16" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Hard, Soft, Information</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q16" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Culture, Strategy, Finance</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q16" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Product, Process, People</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-16"></div>
+        <div class="explanation" id="explanation-16" hidden>
+          <strong>Explanation:</strong> Gerber distinguishes Hard Systems (things), Soft Systems (people/practices), and Information Systems (data/feedback).
+        </div>
+      </div>
+    
+
+      <div class="question-card" data-answer="1">
+        <h3>18. Gerber says marketing strategy starts, ends, lives, and dies with:</h3>
+        <div class="choices">
+    
+        <label class="choice">
+          <input type="radio" name="q17" value="0">
+          <span class="choice-letter">A.</span>
+          <span>Your product features</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q17" value="1">
+          <span class="choice-letter">B.</span>
+          <span>Your customer</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q17" value="2">
+          <span class="choice-letter">C.</span>
+          <span>Your competitors</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="q17" value="3">
+          <span class="choice-letter">D.</span>
+          <span>Your pricing model</span>
+        </label>
+        </div>
+        <div class="feedback" id="feedback-17"></div>
+        <div class="explanation" id="explanation-17" hidden>
+          <strong>Explanation:</strong> Marketing is customer‑centered: understand the customer and build an experience that matches their needs and perceptions.
+        </div>
+      </div>
+    
+
+          <div class="controls">
+            <button id="submitBtn" type="button">Submit Quiz</button>
+            <button id="resetBtn" type="button" class="secondary">Reset Quiz</button>
+          </div>
+
+          <div class="scorebox" id="scorebox">Score: Not submitted yet.</div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const totalQuestions = 18;
+      const submitBtn = document.getElementById('submitBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const scorebox = document.getElementById('scorebox');
+      const cards = Array.from(document.querySelectorAll('.question-card'));
+
+      function clearCardState(card, index) {
+        card.classList.remove('correct', 'incorrect');
+        card.querySelectorAll('.choice').forEach(choice => {
+          choice.classList.remove('correct-choice', 'user-wrong');
+        });
+        const feedback = document.getElementById(`feedback-${index}`);
+        const explanation = document.getElementById(`explanation-${index}`);
+        feedback.textContent = '';
+        feedback.className = 'feedback';
+        explanation.hidden = true;
+      }
+
+      function clearState() {
+        cards.forEach((card, index) => {
+          clearCardState(card, index);
+        });
+      }
+
+      function gradeCard(card, index) {
+        clearCardState(card, index);
+
+        const answer = Number(card.dataset.answer);
+        const selected = card.querySelector(`input[name="q${index}"]:checked`);
+        const feedback = document.getElementById(`feedback-${index}`);
+        const explanation = document.getElementById(`explanation-${index}`);
+        const choices = Array.from(card.querySelectorAll('.choice'));
+
+        choices.forEach((choice, idx) => {
+          if (idx === answer) choice.classList.add('correct-choice');
+        });
+
+        if (!selected) {
+          card.classList.add('incorrect');
+          feedback.textContent = 'No answer selected.';
+          feedback.classList.add('incorrect');
+          explanation.hidden = false;
+          return { correct: false, unanswered: true };
+        }
+
+        const selectedIndex = Number(selected.value);
+        if (selectedIndex === answer) {
+          card.classList.add('correct');
+          feedback.textContent = 'Correct.';
+          feedback.classList.add('correct');
+          explanation.hidden = false;
+          return { correct: true, unanswered: false };
+        }
+
+        card.classList.add('incorrect');
+        feedback.textContent = 'Incorrect.';
+        feedback.classList.add('incorrect');
+        choices[selectedIndex].classList.add('user-wrong');
+        explanation.hidden = false;
+        return { correct: false, unanswered: false };
+      }
+
+      cards.forEach((card, index) => {
+        const actions = document.createElement('div');
+        actions.className = 'question-actions';
+
+        const checkBtn = document.createElement('button');
+        checkBtn.type = 'button';
+        checkBtn.className = 'secondary';
+        checkBtn.textContent = 'Check This Question';
+        checkBtn.addEventListener('click', () => {
+          gradeCard(card, index);
+        });
+
+        actions.appendChild(checkBtn);
+        card.querySelector('.choices').insertAdjacentElement('afterend', actions);
+      });
+
+      submitBtn.addEventListener('click', () => {
+        let correct = 0;
+        let unanswered = 0;
+
+        cards.forEach((card, index) => {
+          const result = gradeCard(card, index);
+          if (result.correct) correct++;
+          if (result.unanswered) unanswered++;
+        });
+
+        const percent = Math.round((correct / totalQuestions) * 100);
+        scorebox.textContent = `Score: ${correct} / ${totalQuestions} (${percent}%). Unanswered: ${unanswered}.`;
+      });
+
+      resetBtn.addEventListener('click', () => {
+        document.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
+        clearState();
+        scorebox.textContent = 'Score: Not submitted yet.';
+      });
+    })();
+  </script>
+</body>
+</html>
